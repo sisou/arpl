@@ -21,11 +21,11 @@ export default class BlockGet extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(BlockGet)
 
-    const method = args.number_or_hash === 'latest'
-      ? 'blockByNumber'
-      : parseInt(args.number_or_hash, 10).toString() === args.number_or_hash
-        ? 'blockByNumber'
-        : 'blockByHash'
+    const method = args.number_or_hash === 'latest' ?
+      'blockByNumber' :
+      parseInt(args.number_or_hash, 10).toString() === args.number_or_hash ?
+        'blockByNumber' :
+        'blockByHash'
 
     const result = await this.$rpc.call(method, [args.number_or_hash, flags.full])
 

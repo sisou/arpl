@@ -19,9 +19,9 @@ export default class Raw extends RpcCommand {
       if (id === 'blockByNumber' && index === 0) parseNumber = false
 
       // Do not parse validity start height
-      if ((id.startsWith('create') || id.startsWith('send'))
-        && id.endsWith('Transaction')
-        && index === argv.length - 1
+      if ((id.startsWith('create') || id.startsWith('send')) &&
+        id.endsWith('Transaction') &&
+        index === argv.length - 1
       ) parseNumber = false
 
       if (parseNumber && parseFloat(arg).toString() === arg) return parseFloat(arg)
