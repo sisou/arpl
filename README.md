@@ -19,7 +19,7 @@ $ npm install -g @sisou/albatross-remote
 $ arpl COMMAND
 running command...
 $ arpl (-v|--version|version)
-@sisou/albatross-remote/0.1.2 linux-x64 node-v14.16.0
+@sisou/albatross-remote/0.1.3 linux-x64 node-v14.16.0
 $ arpl --help [COMMAND]
 USAGE
   $ arpl COMMAND
@@ -68,7 +68,7 @@ OPTIONS
   --unlock             Unlock the account after creation
 ```
 
-_See code: [src/commands/account/create.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/create.ts)_
+_See code: [src/commands/account/create.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/create.ts)_
 
 ## `arpl account:get ADDRESS`
 
@@ -82,7 +82,7 @@ ARGUMENTS
   ADDRESS  Address of the account to display
 ```
 
-_See code: [src/commands/account/get.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/get.ts)_
+_See code: [src/commands/account/get.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/get.ts)_
 
 ## `arpl account:import PRIVATEKEY`
 
@@ -100,7 +100,7 @@ OPTIONS
   --unlock             Unlock the account after import
 ```
 
-_See code: [src/commands/account/import.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/import.ts)_
+_See code: [src/commands/account/import.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/import.ts)_
 
 ## `arpl account:list`
 
@@ -111,7 +111,7 @@ USAGE
   $ arpl account:list
 ```
 
-_See code: [src/commands/account/list.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/list.ts)_
+_See code: [src/commands/account/list.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/list.ts)_
 
 ## `arpl account:lock ADDRESS`
 
@@ -125,7 +125,7 @@ ARGUMENTS
   ADDRESS  Address of the account to lock
 ```
 
-_See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/lock.ts)_
+_See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/lock.ts)_
 
 ## `arpl account:unlock ADDRESS`
 
@@ -142,7 +142,7 @@ OPTIONS
   --password=password  Password to decrypt the key
 ```
 
-_See code: [src/commands/account/unlock.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/account/unlock.ts)_
+_See code: [src/commands/account/unlock.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/account/unlock.ts)_
 
 ## `arpl block:follow`
 
@@ -153,7 +153,7 @@ USAGE
   $ arpl block:follow
 ```
 
-_See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/block/follow.ts)_
+_See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/block/follow.ts)_
 
 ## `arpl block:get NUMBER_OR_HASH`
 
@@ -170,7 +170,7 @@ OPTIONS
   --full  Include block body in information (transactions, etc.)
 ```
 
-_See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/block/get.ts)_
+_See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/block/get.ts)_
 
 ## `arpl help [COMMAND]`
 
@@ -198,7 +198,7 @@ USAGE
   $ arpl raw COMMAND [OPTIONS]
 ```
 
-_See code: [src/commands/raw.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/raw.ts)_
+_See code: [src/commands/raw.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/raw.ts)_
 
 ## `arpl repl`
 
@@ -223,7 +223,7 @@ USAGE
   $ arpl stake:list
 ```
 
-_See code: [src/commands/stake/list.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/list.ts)_
+_See code: [src/commands/stake/list.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/list.ts)_
 
 ## `arpl stake:move WALLET FROM_VALIDATOR_ID TO_VALIDATOR_ID VALUE`
 
@@ -245,7 +245,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/stake/move.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/move.ts)_
+_See code: [src/commands/stake/move.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/move.ts)_
 
 ## `arpl stake:recover WALLET VALUE`
 
@@ -265,7 +265,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/stake/recover.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/recover.ts)_
+_See code: [src/commands/stake/recover.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/recover.ts)_
 
 ## `arpl stake:restart WALLET VALIDATOR_ID VALUE`
 
@@ -286,7 +286,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/stake/restart.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/restart.ts)_
+_See code: [src/commands/stake/restart.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/restart.ts)_
 
 ## `arpl stake:start WALLET VALIDATOR_ID VALUE`
 
@@ -307,7 +307,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/stake/start.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/start.ts)_
+_See code: [src/commands/stake/start.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/start.ts)_
 
 ## `arpl stake:stop WALLET VALIDATOR_ID VALUE`
 
@@ -328,7 +328,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/stake/stop.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/stake/stop.ts)_
+_See code: [src/commands/stake/stop.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/stake/stop.ts)_
 
 ## `arpl status`
 
@@ -339,7 +339,7 @@ USAGE
   $ arpl status
 ```
 
-_See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/status.ts)_
+_See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/status.ts)_
 
 ## `arpl transaction:get HASH`
 
@@ -353,7 +353,7 @@ ARGUMENTS
   HASH  Transaction hash of the transaction to get
 ```
 
-_See code: [src/commands/transaction/get.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/transaction/get.ts)_
+_See code: [src/commands/transaction/get.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/transaction/get.ts)_
 
 ## `arpl transaction:send WALLET RECIPIENT VALUE`
 
@@ -374,7 +374,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/transaction/send.ts)_
+_See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/transaction/send.ts)_
 
 ## `arpl validator:drop VALIDATOR_ID SECRET_KEY RECIPIENT VALUE`
 
@@ -396,7 +396,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/drop.ts)_
+_See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/drop.ts)_
 
 ## `arpl validator:new WALLET SECRET_KEY VALUE`
 
@@ -418,7 +418,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/new.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/new.ts)_
+_See code: [src/commands/validator/new.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/new.ts)_
 
 ## `arpl validator:reactivate WALLET VALIDATOR_ID SECRET_KEY`
 
@@ -439,7 +439,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/reactivate.ts)_
+_See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/reactivate.ts)_
 
 ## `arpl validator:retire WALLET VALIDATOR_ID SECRET_KEY`
 
@@ -460,7 +460,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/retire.ts)_
+_See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/retire.ts)_
 
 ## `arpl validator:unpark WALLET VALIDATOR_ID SECRET_KEY`
 
@@ -481,7 +481,7 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/unpark.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/unpark.ts)_
+_See code: [src/commands/validator/unpark.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/unpark.ts)_
 
 ## `arpl validator:update WALLET VALIDATOR_ID SECRET_KEY`
 
@@ -504,5 +504,5 @@ OPTIONS
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
 ```
 
-_See code: [src/commands/validator/update.ts](https://github.com/sisou/arpl/blob/v0.1.2/src/commands/validator/update.ts)_
+_See code: [src/commands/validator/update.ts](https://github.com/sisou/arpl/blob/v0.1.3/src/commands/validator/update.ts)_
 <!-- commandsstop -->
