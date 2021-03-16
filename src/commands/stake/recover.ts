@@ -39,7 +39,7 @@ export default class StakeRecover extends RpcCommand {
       flags['validity-start'] = (await this.$rpc.call('blockByNumber', ['latest', false]) as Block).blockNumber
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RetireTransaction`, [
+    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [
       args.wallet,
       args.wallet,
       args.value,
