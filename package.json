@@ -23,6 +23,7 @@
     "@types/minimist": "^1.2.1",
     "@types/node": "^10",
     "@types/node-fetch": "^2.5.8",
+    "@types/ws": "^7.4.0",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",
     "eslint-config-oclif-typescript": "^0.1",
