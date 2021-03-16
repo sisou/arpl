@@ -39,7 +39,12 @@ USAGE
 * [`arpl help [COMMAND]`](#arpl-help-command)
 * [`arpl raw COMMAND [OPTIONS]`](#arpl-raw-command-options)
 * [`arpl repl`](#arpl-repl)
-* [`arpl staking:list`](#arpl-stakinglist)
+* [`arpl stake:list`](#arpl-stakelist)
+* [`arpl stake:move WALLET FROM_VALIDATOR_ID TO_VALIDATOR_ID VALUE`](#arpl-stakemove-wallet-from_validator_id-to_validator_id-value)
+* [`arpl stake:recover WALLET VALUE`](#arpl-stakerecover-wallet-value)
+* [`arpl stake:restart WALLET VALIDATOR_ID VALUE`](#arpl-stakerestart-wallet-validator_id-value)
+* [`arpl stake:start WALLET VALIDATOR_ID VALUE`](#arpl-stakestart-wallet-validator_id-value)
+* [`arpl stake:stop WALLET VALIDATOR_ID VALUE`](#arpl-stakestop-wallet-validator_id-value)
 * [`arpl status`](#arpl-status)
 * [`arpl transaction:get HASH`](#arpl-transactionget-hash)
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
@@ -205,16 +210,121 @@ EXAMPLE
 
 _See code: [@sisou/oclif-plugin-repl](https://github.com/sisou/oclif-plugin-repl/blob/v0.3.1/src/commands/repl.ts)_
 
-## `arpl staking:list`
+## `arpl stake:list`
 
 List validators and stakes
 
 ```
 USAGE
-  $ arpl staking:list
+  $ arpl stake:list
 ```
 
-_See code: [src/commands/staking/list.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/staking/list.ts)_
+_See code: [src/commands/stake/list.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/list.ts)_
+
+## `arpl stake:move WALLET FROM_VALIDATOR_ID TO_VALIDATOR_ID VALUE`
+
+Move stake between validators (rededicate)
+
+```
+USAGE
+  $ arpl stake:move WALLET FROM_VALIDATOR_ID TO_VALIDATOR_ID VALUE
+
+ARGUMENTS
+  WALLET             Address of unlocked account that owns the stake
+  FROM_VALIDATOR_ID  ID of the validator to move stake from
+  TO_VALIDATOR_ID    ID of the validator to move stake to
+  VALUE              [NIM] Staking amount to move
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/stake/move.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/move.ts)_
+
+## `arpl stake:recover WALLET VALUE`
+
+Recover stopped stake to the account (unstake)
+
+```
+USAGE
+  $ arpl stake:recover WALLET VALUE
+
+ARGUMENTS
+  WALLET  Address of unlocked account that owns the stake
+  VALUE   NIM amount to recover
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/stake/recover.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/recover.ts)_
+
+## `arpl stake:restart WALLET VALIDATOR_ID VALUE`
+
+Restart staking with a validator (reactivate)
+
+```
+USAGE
+  $ arpl stake:restart WALLET VALIDATOR_ID VALUE
+
+ARGUMENTS
+  WALLET        Address of unlocked account to restart staking with
+  VALIDATOR_ID  ID of the validator to stake with
+  VALUE         NIM amount to stake
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/stake/restart.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/restart.ts)_
+
+## `arpl stake:start WALLET VALIDATOR_ID VALUE`
+
+Start staking with a validator (stake)
+
+```
+USAGE
+  $ arpl stake:start WALLET VALIDATOR_ID VALUE
+
+ARGUMENTS
+  WALLET        Address of unlocked account to start staking with
+  VALIDATOR_ID  ID of the validator to stake with
+  VALUE         NIM amount to stake
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/stake/start.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/start.ts)_
+
+## `arpl stake:stop WALLET VALIDATOR_ID VALUE`
+
+Stop staking with a validator (retire)
+
+```
+USAGE
+  $ arpl stake:stop WALLET VALIDATOR_ID VALUE
+
+ARGUMENTS
+  WALLET        Address of unlocked account that owns the stake
+  VALIDATOR_ID  ID of the validator to stop staking with
+  VALUE         NIM amount to retire
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/stake/stop.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/stake/stop.ts)_
 
 ## `arpl status`
 

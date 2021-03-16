@@ -1,6 +1,6 @@
 import {RpcCommand} from '../../lib/rpc-command'
 
-export default class StakingList extends RpcCommand {
+export default class StakeList extends RpcCommand {
   static description = 'List validators and stakes'
 
   async run() {
