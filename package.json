@@ -1,12 +1,12 @@
 {
   "name": "@sisou/albatross-remote",
   "description": "Straight-forward remote management for Nimiq Albatross nodes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Sören @sisou",
   "bin": {
     "arpl": "./bin/run"
   },
-  "bugs": "https://github.com/sisou/albatross-remote/issues",
+  "bugs": "https://github.com/sisou/arpl/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -41,7 +41,7 @@
     "/yarn.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/sisou/albatross-remote",
+  "homepage": "https://github.com/sisou/arpl",
   "keywords": [
     "oclif"
   ],
@@ -71,7 +71,7 @@
       ]
     }
   },
-  "repository": "sisou/albatross-remote",
+  "repository": "sisou/arpl",
   "scripts": {
     "lint": "eslint . --ext .ts --config .eslintrc",
     "postpack": "rm -f oclif.manifest.json",
