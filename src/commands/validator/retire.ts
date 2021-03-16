@@ -3,8 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 
 import type {Block} from '../../lib/server-types'
 
-export default class ValidatorUnpark extends RpcCommand {
-  static description = 'Unpark a parked validator'
+export default class ValidatorRetire extends RpcCommand {
+  static description = 'Retire an active validator'
 
   static args = [{
     name: 'wallet',
@@ -12,11 +12,11 @@ export default class ValidatorUnpark extends RpcCommand {
     required: true,
   }, {
     name: 'validator_id',
-    description: 'ID of the validator to unpark',
+    description: 'ID of the validator to retire',
     required: true,
   }, {
     name: 'secret_key',
-    description: 'Secret key of the validator to unpark',
+    description: 'Secret key of the validator to retire',
     required: true,
   }]
 
@@ -35,13 +35,13 @@ export default class ValidatorUnpark extends RpcCommand {
   }
 
   async run() {
-    const {args, flags} = this.parse(ValidatorUnpark)
+    const {args, flags} = this.parse(ValidatorRetire)
 
     if (!flags['validity-start']) {
       flags['validity-start'] = (await this.$rpc.call('blockByNumber', ['latest', false]) as Block).blockNumber
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [
+    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`, [
       args.wallet,
       args.validator_id,
       args.secret_key,

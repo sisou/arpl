@@ -4,7 +4,7 @@ import {RpcCommand} from '../../lib/rpc-command'
 import type {Block} from '../../lib/server-types'
 
 export default class ValidatorReactivate extends RpcCommand {
-  static description = 'Send a validator reactivation transaction'
+  static description = 'Reactivate an inactive validator'
 
   static args = [{
     name: 'wallet',

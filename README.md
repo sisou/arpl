@@ -48,8 +48,12 @@ USAGE
 * [`arpl status`](#arpl-status)
 * [`arpl transaction:get HASH`](#arpl-transactionget-hash)
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
+* [`arpl validator:drop VALIDATOR_ID SECRET_KEY RECIPIENT VALUE`](#arpl-validatordrop-validator_id-secret_key-recipient-value)
+* [`arpl validator:new WALLET SECRET_KEY VALUE`](#arpl-validatornew-wallet-secret_key-value)
 * [`arpl validator:reactivate WALLET VALIDATOR_ID SECRET_KEY`](#arpl-validatorreactivate-wallet-validator_id-secret_key)
+* [`arpl validator:retire WALLET VALIDATOR_ID SECRET_KEY`](#arpl-validatorretire-wallet-validator_id-secret_key)
 * [`arpl validator:unpark WALLET VALIDATOR_ID SECRET_KEY`](#arpl-validatorunpark-wallet-validator_id-secret_key)
+* [`arpl validator:update WALLET VALIDATOR_ID SECRET_KEY`](#arpl-validatorupdate-wallet-validator_id-secret_key)
 
 ## `arpl account:create`
 
@@ -372,9 +376,53 @@ OPTIONS
 
 _See code: [src/commands/transaction/send.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/transaction/send.ts)_
 
+## `arpl validator:drop VALIDATOR_ID SECRET_KEY RECIPIENT VALUE`
+
+Drop an inactive validator
+
+```
+USAGE
+  $ arpl validator:drop VALIDATOR_ID SECRET_KEY RECIPIENT VALUE
+
+ARGUMENTS
+  VALIDATOR_ID  ID of the validator to drop
+  SECRET_KEY    Secret key of the validator to drop
+  RECIPIENT     Address to receive validator stake
+  VALUE         NIM amount to drop
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/validator/drop.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/drop.ts)_
+
+## `arpl validator:new WALLET SECRET_KEY VALUE`
+
+Register a new validator
+
+```
+USAGE
+  $ arpl validator:new WALLET SECRET_KEY VALUE
+
+ARGUMENTS
+  WALLET      Address of unlocked account to send transaction from
+  SECRET_KEY  Secret key of the new validator
+  VALUE       NIM amount to stake (min. 1000 NIM)
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --reward-address=reward-address  Reward address for the validator (default: sending address)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/validator/new.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/new.ts)_
+
 ## `arpl validator:reactivate WALLET VALIDATOR_ID SECRET_KEY`
 
-Send a validator reactivation transaction
+Reactivate an inactive validator
 
 ```
 USAGE
@@ -393,9 +441,30 @@ OPTIONS
 
 _See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/reactivate.ts)_
 
+## `arpl validator:retire WALLET VALIDATOR_ID SECRET_KEY`
+
+Retire an active validator
+
+```
+USAGE
+  $ arpl validator:retire WALLET VALIDATOR_ID SECRET_KEY
+
+ARGUMENTS
+  WALLET        Address of unlocked account to send transaction from
+  VALIDATOR_ID  ID of the validator to retire
+  SECRET_KEY    Secret key of the validator to retire
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/validator/retire.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/retire.ts)_
+
 ## `arpl validator:unpark WALLET VALIDATOR_ID SECRET_KEY`
 
-Send a validator unparking transaction
+Unpark a parked validator
 
 ```
 USAGE
@@ -413,4 +482,27 @@ OPTIONS
 ```
 
 _See code: [src/commands/validator/unpark.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/unpark.ts)_
+
+## `arpl validator:update WALLET VALIDATOR_ID SECRET_KEY`
+
+Update reward address or secret key of a validator
+
+```
+USAGE
+  $ arpl validator:update WALLET VALIDATOR_ID SECRET_KEY
+
+ARGUMENTS
+  WALLET        Address of unlocked account to send transaction from
+  VALIDATOR_ID  ID of the validator to update
+  SECRET_KEY    Current secret key of the validator
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --reward-address=reward-address  New reward address for the validator (default: no change)
+  --secret-key=secret-key          New secret key for the validator (default: no change)
+  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+```
+
+_See code: [src/commands/validator/update.ts](https://github.com/sisou/albatross-remote/blob/v0.0.1/src/commands/validator/update.ts)_
 <!-- commandsstop -->
