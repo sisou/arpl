@@ -150,9 +150,15 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.4.tgz#b740f68609dfae8aa71c3a6cab15d816407ba493"
   integrity sha512-60CHpq+eqnTxLZQ4PGHYNwUX572hgpMHGPtTWMjdTMsAvlm69lZV/4ly6O3sAYkomo4NggGcomrDpBe34rxUqw==
 
-"@sisou/oclif-plugin-repl@link:../oclif-plugin-repl":
-  version "0.0.0"
-  uid ""
+"@sisou/oclif-plugin-repl@^0":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@sisou/oclif-plugin-repl/-/oclif-plugin-repl-0.3.1.tgz#a72d1ed86e380284d85aed5acb5bf25226bbf4d5"
+  integrity sha512-06OWvf8cwI07x0Rl5U736+jswhlMjP0AnDp8c5QxLulW5Pgpg4jN9/z1oHlpRA6v+XievGOldfgM3srM8AjA0g==
+  dependencies:
+    "@oclif/command" "^1"
+    "@oclif/config" "^1"
+    string-argv "^0.3.1"
+    tslib "^1"
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"

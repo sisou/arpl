@@ -1,7 +1,7 @@
 {
   "name": "@sisou/albatross-remote",
   "description": "Straight-forward remote management for Nimiq Albatross nodes",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Sören @sisou",
   "bin": {
     "arpl": "./bin/run"
@@ -11,7 +11,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
-    "@sisou/oclif-plugin-repl": "link:./../oclif-plugin-repl",
+    "@sisou/oclif-plugin-repl": "^0",
     "cli-ux": "^5.5.1",
     "minimist": "^1.2.5",
     "node-fetch": "^2.6.1",
@@ -57,7 +57,7 @@
     },
     "plugins": [
       "@oclif/plugin-help",
-      "../oclif-plugin-repl/"
+      "@sisou/oclif-plugin-repl"
     ],
     "hooks": {
       "init": [
