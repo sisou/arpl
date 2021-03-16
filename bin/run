@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+// Reorder args if flags are passed before command
+function reorderArgv() {
+    if (process.argv.length < 3) return
+    if (!process.argv[2].startsWith('-')) return
+    let i = 2
+    for (; i < process.argv.length; i++) {
+        const arg = process.argv[i]
+        if (!arg.startsWith('-')) break // Found the command!
+        if (!arg.includes('=')) i++ // Skip value of the flag
+        // TODO: Handle single-char flags (-f) that pass the value without space or equal-sign
+    }
+    if (!process.argv[i]) return
+
+    // Extract command name
+    const [command] = process.argv.splice(i, 1)
+    // Insert command name as first argument
+    process.argv.splice(2, 0, command)
+}
+
+reorderArgv()
+
+require('@oclif/command').run()
+.then(require('@oclif/command/flush'))
+.catch(require('@oclif/errors/handle'))
