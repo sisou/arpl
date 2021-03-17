@@ -58,3 +58,22 @@ export type MacroBlock = {
 }
 
 export type Block = MicroBlock | MacroBlock
+
+export type ValidatorStake = {
+    balance: number;
+    id: string;
+    publicKey: string;
+    rewardAddress: string;
+    stakes: Stake[];
+}
+
+export type Stake = {
+    balance: number;
+    staker_address: string;
+}
+
+export type Stakes = {
+    activeValidators: ValidatorStake[];
+    inactiveStakes: (Stake & { retire_time: number })[];
+    inactiveValidators: ValidatorStake[];
+}
