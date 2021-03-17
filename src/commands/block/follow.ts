@@ -15,6 +15,8 @@ export default class BlockFollow extends RpcCommand {
 
       const block = await this.$rpc.call('blockByHash', [params.result, true]) as Block
 
+      const batchesPerEpoch = Math.ceil(block.batch / block.epoch)
+
       this.log([
         block.blockType,
         `#${block.blockNumber}.${block.viewNumber}`,
@@ -26,7 +28,7 @@ export default class BlockFollow extends RpcCommand {
           `${block.transactions!.length} tx${block.transactions!.length !== 1 ? 's' : ''}` :
           block.is_election_block ?
             `election (epoch ${block.epoch} => ${block.epoch + 1})` :
-            `checkpoint (batch ${block.batch % 4}/4)`,
+            `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})`,
       ].join(' ｜'))
     })
   }
