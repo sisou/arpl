@@ -37,6 +37,6 @@ export default class Raw extends RpcCommand {
 
     const result = await this.$rpc.call(id, params)
 
-    console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
+    console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
   }
 }

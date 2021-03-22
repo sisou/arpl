@@ -25,7 +25,7 @@ export default class BlockFollow extends RpcCommand {
           block.producer.slotNumber.toString().padStart(3, ' ') /* macro block */ :
           '   ',
         block.blockType === 'micro' ?
-          `${block.transactions!.length} tx${block.transactions!.length !== 1 ? 's' : ''}` :
+          `${block.transactions!.length} tx${block.transactions!.length === 1 ? '' : 's'}` :
           block.is_election_block ?
             `election (epoch ${block.epoch} => ${block.epoch + 1})` :
             `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})`,
