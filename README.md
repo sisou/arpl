@@ -10,6 +10,7 @@ Straight-forward remote management for Nimiq Albatross nodes
 
 <!-- toc -->
 * [Usage](#usage)
+* [Options](#options)
 * [Commands](#commands)
 <!-- tocstop -->
 # Usage
@@ -26,6 +27,18 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+
+# Options
+<!-- options -->
+```sh-session
+  -u, --url   The URL of the RPC server, overwrites host and port
+              options (default: [http|ws]://localhost:8648[/ws])
+  -h, --host  Hostname of the RPC server (default: localhost)
+  -p, --port  Port of the RPC server (default: 8648)
+
+```
+<!-- optionsstop -->
+
 # Commands
 <!-- commands -->
 * [`arpl account:create`](#arpl-accountcreate)

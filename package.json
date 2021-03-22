@@ -49,10 +49,23 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
+    "helpClass": "./src/help",
     "bin": "arpl",
     "topics": {
       "account": {
         "description": "Manage accounts stored in the node"
+      },
+      "block": {
+        "description": "Fetch blocks and follow the chain live"
+      },
+      "stake": {
+        "description": "Manage your stake(s)"
+      },
+      "transaction": {
+        "description": "Send and fetch transactions"
+      },
+      "validator": {
+        "description": "Manage your validator"
       }
     },
     "plugins": [
