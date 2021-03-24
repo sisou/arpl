@@ -7,7 +7,8 @@ export default class BlockGet extends RpcCommand {
   static args = [{
     name: 'number_or_hash',
     description: 'Block number or hash of the block to get',
-    required: true,
+    required: false,
+    default: 'latest',
   }]
 
   static flags = {

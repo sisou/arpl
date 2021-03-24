@@ -48,7 +48,7 @@ USAGE
 * [`arpl account:lock ADDRESS`](#arpl-accountlock-address)
 * [`arpl account:unlock ADDRESS`](#arpl-accountunlock-address)
 * [`arpl block:follow`](#arpl-blockfollow)
-* [`arpl block:get NUMBER_OR_HASH`](#arpl-blockget-number_or_hash)
+* [`arpl block:get [NUMBER_OR_HASH]`](#arpl-blockget-number_or_hash)
 * [`arpl help [COMMAND]`](#arpl-help-command)
 * [`arpl raw COMMAND [OPTIONS]`](#arpl-raw-command-options)
 * [`arpl repl`](#arpl-repl)
@@ -168,16 +168,16 @@ USAGE
 
 _See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.2.0/src/commands/block/follow.ts)_
 
-## `arpl block:get NUMBER_OR_HASH`
+## `arpl block:get [NUMBER_OR_HASH]`
 
 Show block information
 
 ```
 USAGE
-  $ arpl block:get NUMBER_OR_HASH
+  $ arpl block:get [NUMBER_OR_HASH]
 
 ARGUMENTS
-  NUMBER_OR_HASH  Block number or hash of the block to get
+  NUMBER_OR_HASH  [default: latest] Block number or hash of the block to get
 
 OPTIONS
   --full  Include block body in information (transactions, etc.)
