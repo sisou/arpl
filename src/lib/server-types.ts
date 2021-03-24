@@ -1,7 +1,27 @@
+export type Transaction = {
+    blockNumber: number;
+    confirmations: number;
+    data: string;
+    fee: number;
+    flags: number;
+    from: string;
+    hash: string;
+    proof: string;
+    timestamp: number;
+    to: string;
+    validityStartHeight: number;
+    value: number;
+}
+
+export enum BlockType {
+    MICRO = 'micro',
+    MACRO = 'macro',
+}
+
 export type MicroBlock = {
     batch: number;
     blockNumber: number;
-    blockType: 'micro';
+    blockType: BlockType.MICRO;
     bodyRoot: string;
     epoch: number;
     extra_data: string;
@@ -14,25 +34,25 @@ export type MicroBlock = {
     parentHash: string;
     producer: {
         publicKey: string;
-        slotNumber: 478;
+        slotNumber: number;
         validatorId: string;
     };
     seed: string;
     stateRoot: string;
     timestamp: number;
-    transactions?: string[];
-    type: 'micro';
+    transactions?: Transaction[];
+    type: BlockType.MICRO;
     viewNumber: number;
 }
 
 export type MacroBlock = {
     batch: number;
     blockNumber: number;
-    blockType: 'macro';
+    blockType: BlockType.MACRO;
     bodyRoot: string;
     epoch: number;
     hash: string;
-    is_election_block: true;
+    is_election_block: boolean;
     justification: {
         round: number;
         sig: {
@@ -53,11 +73,16 @@ export type MacroBlock = {
     }[];
     stateRoot: string;
     timestamp: number;
-    type: 'macro';
+    type: BlockType.MACRO;
     viewNumber: number;
 }
 
 export type Block = MicroBlock | MacroBlock
+
+export type Stake = {
+    balance: number;
+    staker_address: string;
+}
 
 export type ValidatorStake = {
     balance: number;
@@ -65,11 +90,6 @@ export type ValidatorStake = {
     publicKey: string;
     rewardAddress: string;
     stakes: Stake[];
-}
-
-export type Stake = {
-    balance: number;
-    staker_address: string;
 }
 
 export type Stakes = {
