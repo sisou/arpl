@@ -58,6 +58,9 @@
       "block": {
         "description": "Fetch blocks and follow the chain live"
       },
+      "peer": {
+        "description": "Fetch information about your peers"
+      },
       "stake": {
         "description": "Manage your stake(s)"
       },

@@ -50,6 +50,7 @@ USAGE
 * [`arpl block:follow`](#arpl-blockfollow)
 * [`arpl block:get [NUMBER_OR_HASH]`](#arpl-blockget-number_or_hash)
 * [`arpl help [COMMAND]`](#arpl-help-command)
+* [`arpl peer:id`](#arpl-peerid)
 * [`arpl raw COMMAND [OPTIONS]`](#arpl-raw-command-options)
 * [`arpl repl`](#arpl-repl)
 * [`arpl stake:list`](#arpl-stakelist)
@@ -201,6 +202,17 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
+
+## `arpl peer:id`
+
+Get the local peer ID of the node
+
+```
+USAGE
+  $ arpl peer:id
+```
+
+_See code: [src/commands/peer/id.ts](https://github.com/sisou/arpl/blob/v0.2.0/src/commands/peer/id.ts)_
 
 ## `arpl raw COMMAND [OPTIONS]`
 
