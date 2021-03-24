@@ -1,8 +1,6 @@
 import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
-import type {Block} from '../../lib/server-types'
-
 export default class ValidatorUnpark extends RpcCommand {
   static description = 'Unpark a parked validator'
 
@@ -38,7 +36,7 @@ export default class ValidatorUnpark extends RpcCommand {
     const {args, flags} = this.parse(ValidatorUnpark)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = (await this.$rpc.call('blockByNumber', ['latest', false]) as Block).blockNumber
+      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
     }
 
     const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [

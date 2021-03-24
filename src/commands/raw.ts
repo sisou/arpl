@@ -15,8 +15,6 @@ export default class Raw extends RpcCommand {
 
     const params = argv.map((arg, index) => {
       let parseNumber = true
-      // Do not parse block number
-      if (id === 'blockByNumber' && index === 0) parseNumber = false
 
       // Do not parse validity start height
       if ((id.startsWith('create') || id.startsWith('send')) &&

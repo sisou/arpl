@@ -1,8 +1,6 @@
 import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
-import type {Block} from '../../lib/server-types'
-
 export default class StakeRecover extends RpcCommand {
   static description = 'Recover stopped stake to the account (unstake)'
 
@@ -36,7 +34,7 @@ export default class StakeRecover extends RpcCommand {
     const {args, flags} = this.parse(StakeRecover)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = (await this.$rpc.call('blockByNumber', ['latest', false]) as Block).blockNumber
+      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
     }
 
     const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [

@@ -22,13 +22,22 @@ export default class BlockGet extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(BlockGet)
 
-    const method = args.number_or_hash === 'latest' ?
-      'blockByNumber' :
-      parseInt(args.number_or_hash, 10).toString() === args.number_or_hash ?
-        'blockByNumber' :
-        'blockByHash'
+    let method: string
+    let params: any[]
 
-    const result = await this.$rpc.call(method, [args.number_or_hash, flags.full])
+    if (args.number_or_hash === 'latest') {
+      method = 'getLatestBlock'
+      params = [flags.full]
+    } else {
+      const isBlockNumber = parseInt(args.number_or_hash, 10).toString() === args.number_or_hash
+      method = isBlockNumber ? 'getBlockByNumber' : 'getBlockByHash'
+      params = [
+        isBlockNumber ? parseInt(args.number_or_hash, 10) : args.number_or_hash,
+        flags.full,
+      ]
+    }
+
+    const result = await this.$rpc.call(method, params)
 
     console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
   }

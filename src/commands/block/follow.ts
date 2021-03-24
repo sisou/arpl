@@ -13,7 +13,7 @@ export default class BlockFollow extends RpcCommand {
     (this.$rpc as Socket).on('subscription', async (params: {result: string; subscription: number}) => {
       if (params.subscription !== subscriptionId) return
 
-      const block = await this.$rpc.call('blockByHash', [params.result, true]) as Block
+      const block = await this.$rpc.call('getBlockByHash', [params.result, true]) as Block
 
       const batchesPerEpoch = Math.ceil(block.batch / block.epoch)
 

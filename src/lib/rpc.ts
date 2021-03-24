@@ -12,9 +12,6 @@ type WebsocketOptions = {
 
 export class Socket extends WebsocketClient {
   public async call(method: string, params?: IWSRequestParams, timeout?: number, ws_opts?: WebsocketOptions): Promise<unknown> {
-    // TODO: Remove when RPC server accepts numbers for the block height
-    if (method === 'blockByNumber' && params && typeof params[0] === 'number') params[0] = params[0].toString()
-
     // Show loading spinner if no result after 1s
     const loaderTimeout = setTimeout(() => cli.action.start('Loading'), 1000)
 

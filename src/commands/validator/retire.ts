@@ -1,8 +1,6 @@
 import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
-import type {Block} from '../../lib/server-types'
-
 export default class ValidatorRetire extends RpcCommand {
   static description = 'Retire an active validator'
 
@@ -38,7 +36,7 @@ export default class ValidatorRetire extends RpcCommand {
     const {args, flags} = this.parse(ValidatorRetire)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = (await this.$rpc.call('blockByNumber', ['latest', false]) as Block).blockNumber
+      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
     }
 
     const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`, [
