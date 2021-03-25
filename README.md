@@ -16,7 +16,7 @@ Straight-forward remote management for Nimiq Albatross nodes
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g @sisou/albatross-remote
+$ npm install -g @sisou/albatross-remote@next
 $ arpl COMMAND
 running command...
 $ arpl (-v|--version|version)
