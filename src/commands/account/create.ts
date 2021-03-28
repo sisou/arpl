@@ -20,8 +20,8 @@ export default class AccountCreate extends RpcCommand {
 
     const account = await this.$rpc.call('createAccount', [flags.password || null]) as {
       address: string;
-      public_key: string;
-      private_key: string;
+      publicKey: string;
+      privateKey: string;
     }
 
     if (flags.unlock) {
@@ -30,6 +30,6 @@ export default class AccountCreate extends RpcCommand {
     }
 
     this.log(`Account created: ${account.address} (${flags.unlock ? 'unlocked' : 'locked'})`)
-    this.log(`Private key: ${account.private_key}`)
+    this.log(`Private key: ${account.privateKey}`)
   }
 }
