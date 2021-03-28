@@ -29,13 +29,9 @@ export default class AccountGet extends RpcCommand {
       HTLC: {
         balance: number;
       };
-    } | {
-      StakingContract: {
-        balance: number;
-      };
     }
 
-    let type: 'basic' | 'vesting' | 'HTLC' | 'staking-contract' | undefined
+    let type: 'basic' | 'vesting' | 'htlc' | undefined
     let account: { balance: number } | undefined
     if ('Basic' in result) {
       type = 'basic'
@@ -44,14 +40,14 @@ export default class AccountGet extends RpcCommand {
       type = 'vesting'
       account = result.Vesting
     } else if ('HTLC' in result) {
-      type = 'HTLC'
+      type = 'htlc'
       account = result.HTLC
-    } else if ('StakingContract' in result) {
-      type = 'staking-contract'
-      account = result.StakingContract
     } else throw new Error('Unknown account type')
 
     this.log(`Type: ${type}`)
     this.log(`Balance: ${formatBalance(account.balance)}`)
+    if (type !== 'basic') {
+      console.dir(account, {depth: Infinity, maxArrayLength: Infinity})
+    }
   }
 }
