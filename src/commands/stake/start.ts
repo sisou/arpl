@@ -23,6 +23,9 @@ export default class StakeStart extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    address: flags.string({
+      description: 'Staker address (default: sender address)',
+    }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',
       default: 0,
@@ -45,6 +48,7 @@ export default class StakeStart extends RpcCommand {
     const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}StakeTransaction`, [
       args.wallet,
       args.validator_id,
+      flags.address || null,
       args.value,
       flags.fee,
       flags['validity-start'].toString(),
