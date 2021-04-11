@@ -17,7 +17,7 @@ export default class StakeList extends RpcCommand {
   async run() {
     const {flags} = this.parse(StakeList)
 
-    const stakes = await this.$rpc.call('listStakes') as Stakes
+    const stakes = await this.call(StakeList, 'listStakes') as Stakes
 
     if (flags.plain) {
       console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity})

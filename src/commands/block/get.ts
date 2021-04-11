@@ -37,7 +37,7 @@ export default class BlockGet extends RpcCommand {
       ]
     }
 
-    const result = await this.$rpc.call(method, params)
+    const result = await this.call(BlockGet, method, params)
 
     console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
   }

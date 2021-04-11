@@ -1,3 +1,5 @@
+export const STAKING_CONTRACT_ADDRESS = 'NQ38 STAK 1NG0 0000 0000 C0NT RACT 0000 0000'
+
 export type Transaction = {
     blockNumber: number;
     confirmations: number;

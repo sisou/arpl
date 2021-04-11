@@ -38,10 +38,10 @@ export default class StakeStop extends RpcCommand {
     const {args, flags} = this.parse(StakeStop)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(StakeStop, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RetireTransaction`, [
+    const hash = await this.call(StakeStop, `${flags.dry ? 'create' : 'send'}RetireTransaction`, [
       args.wallet,
       args.validator_id,
       args.value,

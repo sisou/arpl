@@ -10,7 +10,8 @@ Straight-forward remote management for Nimiq Albatross nodes
 
 <!-- toc -->
 * [Usage](#usage)
-* [Options](#options)
+* [Connection Options](#connection-options)
+* [Request Options](#request-options)
 * [Commands](#commands)
 <!-- tocstop -->
 # Usage
@@ -28,8 +29,7 @@ USAGE
 ```
 <!-- usagestop -->
 
-# Options
-<!-- options -->
+# Connection Options
 ```sh-session
   -u, --url   The URL of the RPC server, overwrites host and port
               options (default: [http|ws]://localhost:8648[/ws])
@@ -37,7 +37,11 @@ USAGE
   -p, --port  Port of the RPC server (default: 8648)
 
 ```
-<!-- optionsstop -->
+
+# Request Options
+```sh-session
+  -t, --timeout  Timeout for request in ms, set to 0 to disable (default: 5000)
+```
 
 # Commands
 <!-- commands -->

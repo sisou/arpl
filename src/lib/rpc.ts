@@ -16,7 +16,7 @@ export class Socket extends WebsocketClient {
     const loaderTimeout = setTimeout(() => cli.action.start('Loading'), 1000)
 
     return super
-    .call(method, params || [], timeout || 5000, ws_opts)
+    .call(method, params || [], timeout, ws_opts)
     .then(result => {
       cli.action.stop()
       return result
@@ -36,7 +36,7 @@ export class Request {
 
   constructor(private url: string) {}
 
-  public async call(method: string, params?: IWSRequestParams | undefined): Promise<unknown> {
+  public async call(method: string, params?: IWSRequestParams | undefined, _timeout?: number): Promise<unknown> {
     return fetch(this.url, {
       method: 'POST',
       headers: {

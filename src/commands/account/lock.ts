@@ -16,7 +16,7 @@ export default class AccountLock extends RpcCommand {
   async run() {
     const {args} = this.parse(AccountLock)
 
-    await this.$rpc.call('lockAccount', [args.address])
+    await this.call(AccountLock, 'lockAccount', [args.address])
 
     this.log(`Account locked: ${args.address}`)
   }

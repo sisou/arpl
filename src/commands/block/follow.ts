@@ -7,13 +7,13 @@ export default class BlockFollow extends RpcCommand {
   static description = 'Stream blocks live'
 
   async run() {
-    const subscriptionId = await this.$rpc.call('headSubscribe') as number // Throws when not in REPL
+    const subscriptionId = await this.call(BlockFollow, 'headSubscribe') as number // Throws when not in REPL
     this.log('Subscribed to headers');
 
     (this.$rpc as Socket).on('subscription', async (params: {result: string; subscription: number}) => {
       if (params.subscription !== subscriptionId) return
 
-      const block = await this.$rpc.call('getBlockByHash', [params.result, true]) as Block
+      const block = await this.call(BlockFollow, 'getBlockByHash', [params.result, true]) as Block
 
       const batchesPerEpoch = Math.ceil(block.batch / block.epoch)
 

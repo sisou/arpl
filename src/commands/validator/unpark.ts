@@ -36,10 +36,10 @@ export default class ValidatorUnpark extends RpcCommand {
     const {args, flags} = this.parse(ValidatorUnpark)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(ValidatorUnpark, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [
+    const hash = await this.call(ValidatorUnpark, `${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [
       args.wallet,
       args.validator_id,
       args.secret_key,

@@ -37,10 +37,10 @@ export default class TransactionSend extends RpcCommand {
     const {args, flags} = this.parse(TransactionSend)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(TransactionSend, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}BasicTransaction`, [
+    const hash = await this.call(TransactionSend, `${flags.dry ? 'create' : 'send'}BasicTransaction`, [
       args.wallet,
       args.recipient,
       args.value,

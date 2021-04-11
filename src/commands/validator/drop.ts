@@ -43,10 +43,10 @@ export default class ValidatorDrop extends RpcCommand {
     const {args, flags} = this.parse(ValidatorDrop)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(ValidatorDrop, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
+    const hash = await this.call(ValidatorDrop, `${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
       args.validator_id,
       args.recipient,
       args.secret_key,

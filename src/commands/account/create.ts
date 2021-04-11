@@ -18,7 +18,7 @@ export default class AccountCreate extends RpcCommand {
   async run() {
     const {flags} = this.parse(AccountCreate)
 
-    const account = await this.$rpc.call('createAccount', [flags.password || null]) as {
+    const account = await this.call(AccountCreate, 'createAccount', [flags.password || null]) as {
       address: string;
       publicKey: string;
       privateKey: string;
@@ -26,7 +26,7 @@ export default class AccountCreate extends RpcCommand {
 
     if (flags.unlock) {
       this.log('Account created, unlocking...')
-      await this.$rpc.call('unlockAccount', [account.address, flags.password || null, /* duration */ null])
+      await this.call(AccountCreate, 'unlockAccount', [account.address, flags.password || null, /* duration */ null])
     }
 
     this.log(`Account created: ${account.address} (${flags.unlock ? 'unlocked' : 'locked'})`)

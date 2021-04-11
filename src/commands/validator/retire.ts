@@ -36,10 +36,10 @@ export default class ValidatorRetire extends RpcCommand {
     const {args, flags} = this.parse(ValidatorRetire)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(ValidatorRetire, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`, [
+    const hash = await this.call(ValidatorRetire, `${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`, [
       args.wallet,
       args.validator_id,
       args.secret_key,

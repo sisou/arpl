@@ -9,14 +9,10 @@ export default class TransactionGet extends RpcCommand {
     required: true,
   }]
 
-  static flags = {
-    ...RpcCommand.flags,
-  }
-
   async run() {
     const {args} = this.parse(TransactionGet)
 
-    const result = await this.$rpc.call('getTransactionByHash', [args.hash])
+    const result = await this.call(TransactionGet, 'getTransactionByHash', [args.hash])
 
     console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
   }

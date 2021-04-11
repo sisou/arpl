@@ -42,10 +42,10 @@ export default class StakeMove extends RpcCommand {
     const {args, flags} = this.parse(StakeMove)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(StakeMove, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}RededicateTransaction`, [
+    const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}RededicateTransaction`, [
       args.wallet,
       args.from_validator_id,
       args.to_validator_id,

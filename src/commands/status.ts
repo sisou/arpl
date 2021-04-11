@@ -10,9 +10,9 @@ export default class Status extends RpcCommand {
       epochNumber,
       established,
     ] = await Promise.all([
-      this.$rpc.call('getBlockNumber'),
-      this.$rpc.call('getEpochNumber'),
-      this.$rpc.call('isEstablished'),
+      this.call(Status, 'getBlockNumber'),
+      this.call(Status, 'getEpochNumber'),
+      this.call(Status, 'isEstablished'),
       // TODO: Get connected peers
       // TODO: Get validator status
     ])

@@ -17,7 +17,7 @@ export default class AccountGet extends RpcCommand {
   async run() {
     const {args} = this.parse(AccountGet)
 
-    const result = await this.$rpc.call('getAccount', [args.address]) as {
+    const result = await this.call(AccountGet, 'getAccount', [args.address]) as {
       Basic: {
         balance: number;
       };

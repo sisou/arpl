@@ -1,5 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import Rpc from './rpc'
+import type * as Parser from '@oclif/parser'
+import type {IWSRequestParams} from 'rpc-websockets/dist/lib/client'
 
 export abstract class RpcCommand extends Command {
     static flags = {
@@ -16,7 +18,28 @@ export abstract class RpcCommand extends Command {
         char: 'p',
         hidden: true,
       }),
+      timeout: flags.integer({
+        char: 't',
+        hidden: true,
+        default: 5000,
+      }),
     }
 
     protected $rpc = Rpc.getClient()
+
+    protected parse<F, A extends {
+      [name: string]: any;
+    }>(options: Parser.Input<F>, argv?: string[]): Parser.Output<F, A> {
+      const mergedOptions: Parser.Input<any> = {
+        ...options,
+        args: options.args || RpcCommand.args,
+        flags: options.flags || RpcCommand.flags || {},
+      }
+      return super.parse(mergedOptions, argv)
+    }
+
+    protected call(command: typeof Command, method: string, params?: IWSRequestParams) {
+      const {flags} = this.parse(command)
+      return this.$rpc.call(method, params, flags.timeout)
+    }
 }

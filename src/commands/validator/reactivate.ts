@@ -36,10 +36,10 @@ export default class ValidatorReactivate extends RpcCommand {
     const {args, flags} = this.parse(ValidatorReactivate)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.$rpc.call('getBlockNumber') as number
+      flags['validity-start'] = await this.call(ValidatorReactivate, 'getBlockNumber') as number
     }
 
-    const hash = await this.$rpc.call(`${flags.dry ? 'create' : 'send'}ReactivateValidatorTransaction`, [
+    const hash = await this.call(ValidatorReactivate, `${flags.dry ? 'create' : 'send'}ReactivateValidatorTransaction`, [
       args.wallet,
       args.validator_id,
       args.secret_key,
