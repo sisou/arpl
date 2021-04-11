@@ -330,6 +330,7 @@ ARGUMENTS
   VALUE         NIM amount to stake
 
 OPTIONS
+  --address=address                Staker address (default: sender address)
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --validity-start=validity-start  Validity start height of the transaction (default: latest)
