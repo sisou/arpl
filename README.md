@@ -50,6 +50,7 @@ USAGE
 * [`arpl account:import PRIVATEKEY`](#arpl-accountimport-privatekey)
 * [`arpl account:list`](#arpl-accountlist)
 * [`arpl account:lock ADDRESS`](#arpl-accountlock-address)
+* [`arpl account:transactions ADDRESS`](#arpl-accounttransactions-address)
 * [`arpl account:unlock ADDRESS`](#arpl-accountunlock-address)
 * [`arpl block:follow`](#arpl-blockfollow)
 * [`arpl block:get [NUMBER_OR_HASH]`](#arpl-blockget-number_or_hash)
@@ -144,6 +145,34 @@ ARGUMENTS
 ```
 
 _See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.3.0-next.3/src/commands/account/lock.ts)_
+
+## `arpl account:transactions ADDRESS`
+
+List transactions for an address (newest first)
+
+```
+USAGE
+  $ arpl account:transactions ADDRESS
+
+ARGUMENTS
+  ADDRESS  Address to display transactions for
+
+OPTIONS
+  -x, --extended          show extra columns
+  --columns=columns       only show provided columns (comma-separated)
+  --csv                   output is csv format [alias: --output=csv]
+  --filter=filter         filter property by partial string matching, ex: name=foo
+  --max=max               Max number of transactions to return
+  --no-header             hide table header from output
+  --no-truncate           do not truncate output to fit screen
+  --output=csv|json|yaml  output in a more machine friendly format
+  --sort=sort             property to sort by (prepend '-' for descending)
+
+ALIASES
+  $ arpl account:txs
+```
+
+_See code: [src/commands/account/transactions.ts](https://github.com/sisou/arpl/blob/v0.3.0-next.3/src/commands/account/transactions.ts)_
 
 ## `arpl account:unlock ADDRESS`
 
