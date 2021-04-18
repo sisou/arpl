@@ -10,6 +10,9 @@ export default class Raw extends RpcCommand {
     name: 'options',
   }]
 
+  // Disable argument validation
+  static strict = false
+
   async run() {
     const [id, ...argv] = this.argv.filter(arg => !arg.startsWith('-'))
 
