@@ -3,6 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class TransactionGet extends RpcCommand {
   static description = 'Show transaction information'
 
+  static aliases = ['tx:get']
+
   static args = [{
     name: 'hash',
     description: 'Transaction hash of the transaction to get',

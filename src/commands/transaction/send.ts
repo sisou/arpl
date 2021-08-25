@@ -4,6 +4,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class TransactionSend extends RpcCommand {
   static description = 'Send a transaction'
 
+  static aliases = ['tx:send']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account to send transaction from',
