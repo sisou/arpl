@@ -19,8 +19,9 @@ export default class ValidatorDrop extends RpcCommand {
       description: 'Fee in Luna (default: 0)',
       default: 0,
     }),
-    'validity-start': flags.integer({
+    'validity-start': flags.string({
       description: 'Validity start height of the transaction (default: latest)',
+      default: '+0',
     }),
     dry: flags.boolean({
       description: 'Return serialized transaction without sending it',
@@ -30,15 +31,11 @@ export default class ValidatorDrop extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorDrop)
 
-    if (!flags['validity-start']) {
-      flags['validity-start'] = await this.call(ValidatorDrop, 'getBlockNumber') as number
-    }
-
     const hash = await this.call(ValidatorDrop, `${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
       args.wallet,
       flags['recipient'] || args.wallet,
       flags.fee,
-      flags['validity-start'].toString(),
+      flags['validity-start'],
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
