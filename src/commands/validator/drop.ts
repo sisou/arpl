@@ -5,28 +5,16 @@ export default class ValidatorDrop extends RpcCommand {
   static description = 'Drop an inactive validator'
 
   static args = [{
-    name: 'validator_id',
-    description: 'ID of the validator to drop',
+    name: 'wallet',
+    description: 'Address of unlocked validator owner account to send transaction from',
     required: true,
-  }, {
-    name: 'secret_key',
-    description: 'Secret key of the validator to drop',
-    required: true,
-  }, {
-    // TODO: Use reward address by default
-    name: 'recipient',
-    description: 'Address to receive validator stake',
-    required: true,
-  }, {
-    // TODO: Use available amount by default
-    name: 'value',
-    description: 'NIM amount to drop',
-    required: true,
-    parse: (input: string) => parseFloat(input) * 1e5,
   }]
 
   static flags = {
     ...RpcCommand.flags,
+    recipient: flags.string({
+      description: 'Address to receive validator deposit (default: sender address)',
+    }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',
       default: 0,
@@ -47,10 +35,8 @@ export default class ValidatorDrop extends RpcCommand {
     }
 
     const hash = await this.call(ValidatorDrop, `${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
-      args.validator_id,
-      args.recipient,
-      args.secret_key,
-      args.value,
+      args.wallet,
+      flags['recipient'] || args.wallet,
       flags.fee,
       flags['validity-start'].toString(),
     ])

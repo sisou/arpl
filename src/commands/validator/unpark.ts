@@ -9,12 +9,8 @@ export default class ValidatorUnpark extends RpcCommand {
     description: 'Address of unlocked account to send transaction from',
     required: true,
   }, {
-    name: 'validator_id',
-    description: 'ID of the validator to unpark',
-    required: true,
-  }, {
-    name: 'secret_key',
-    description: 'Secret key of the validator to unpark',
+    name: 'warm_secret_key',
+    description: 'Secret key of the warm address',
     required: true,
   }]
 
@@ -41,8 +37,7 @@ export default class ValidatorUnpark extends RpcCommand {
 
     const hash = await this.call(ValidatorUnpark, `${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [
       args.wallet,
-      args.validator_id,
-      args.secret_key,
+      args.warm_secret_key,
       flags.fee,
       flags['validity-start'].toString(),
     ])
