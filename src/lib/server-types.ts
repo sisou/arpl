@@ -75,6 +75,7 @@ export type MacroBlock = {
     }[];
     stateRoot: string;
     timestamp: number;
+    transactions?: Transaction[];
     type: BlockType.MACRO;
     viewNumber: number;
 }
