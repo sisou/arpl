@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class ValidatorNew extends RpcCommand {
-  static description = 'Register a new validator'
+  static description = 'Register a new validator (requires 10k NIM deposit)'
 
   static args = [{
     name: 'wallet',
@@ -12,15 +12,13 @@ export default class ValidatorNew extends RpcCommand {
     name: 'secret_key',
     description: 'Secret key of the new validator',
     required: true,
-  }, {
-    name: 'value',
-    description: 'NIM amount to stake (min. 1000 NIM)',
-    required: true,
-    parse: (input: string) => parseFloat(input) * 1e5,
   }]
 
   static flags = {
     ...RpcCommand.flags,
+    'warm-address': flags.string({
+      description: 'Address of the warm key to sign unparking transactions (default: sending address)',
+    }),
     'reward-address': flags.string({
       description: 'Reward address for the validator (default: sending address)',
     }),
@@ -45,9 +43,9 @@ export default class ValidatorNew extends RpcCommand {
 
     const hash = await this.call(ValidatorNew, `${flags.dry ? 'create' : 'send'}NewValidatorTransaction`, [
       args.wallet,
-      flags['reward-address'] || args.wallet,
+      flags['warm-address'] || args.wallet,
       args.secret_key,
-      args.value,
+      flags['reward-address'] || args.wallet,
       flags.fee,
       flags['validity-start'].toString(),
     ])
