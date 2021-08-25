@@ -28,8 +28,9 @@ export default class ValidatorUpdate extends RpcCommand {
       description: 'Fee in Luna (default: 0)',
       default: 0,
     }),
-    'validity-start': flags.integer({
+    'validity-start': flags.string({
       description: 'Validity start height of the transaction (default: latest)',
+      default: '+0',
     }),
     dry: flags.boolean({
       description: 'Return serialized transaction without sending it',
@@ -39,10 +40,6 @@ export default class ValidatorUpdate extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorUpdate)
 
-    if (!flags['validity-start']) {
-      flags['validity-start'] = await this.call(ValidatorUpdate, 'getBlockNumber') as number
-    }
-
     const hash = await this.call(ValidatorUpdate, `${flags.dry ? 'create' : 'send'}UpdateValidatorTransaction`, [
       args.wallet,
       flags['warm-address'] || null,
@@ -50,7 +47,7 @@ export default class ValidatorUpdate extends RpcCommand {
       flags['reward-address'] || null,
       flags['signal-data'] || null,
       flags.fee,
-      flags['validity-start'].toString(),
+      flags['validity-start'],
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)

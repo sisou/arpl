@@ -22,8 +22,9 @@ export default class StakeRestart extends RpcCommand {
       description: 'Fee in Luna (default: 0)',
       default: 0,
     }),
-    'validity-start': flags.integer({
+    'validity-start': flags.string({
       description: 'Validity start height of the transaction (default: latest)',
+      default: '+0',
     }),
     dry: flags.boolean({
       description: 'Return serialized transaction without sending it',
@@ -33,15 +34,11 @@ export default class StakeRestart extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(StakeRestart)
 
-    if (!flags['validity-start']) {
-      flags['validity-start'] = await this.call(StakeRestart, 'getBlockNumber') as number
-    }
-
     const hash = await this.call(StakeRestart, `${flags.dry ? 'create' : 'send'}ReactivateTransaction`, [
       args.wallet,
       args.value,
       flags.fee,
-      flags['validity-start'].toString(),
+      flags['validity-start'],
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)

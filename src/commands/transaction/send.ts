@@ -27,8 +27,9 @@ export default class TransactionSend extends RpcCommand {
       description: 'Fee in Luna (default: 0)',
       default: 0,
     }),
-    'validity-start': flags.integer({
+    'validity-start': flags.string({
       description: 'Validity start height of the transaction (default: latest)',
+      default: '+0',
     }),
     dry: flags.boolean({
       description: 'Return serialized transaction without sending it',
@@ -38,16 +39,12 @@ export default class TransactionSend extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(TransactionSend)
 
-    if (!flags['validity-start']) {
-      flags['validity-start'] = await this.call(TransactionSend, 'getBlockNumber') as number
-    }
-
     const hash = await this.call(TransactionSend, `${flags.dry ? 'create' : 'send'}BasicTransaction`, [
       args.wallet,
       args.recipient,
       args.value,
       flags.fee,
-      flags['validity-start'].toString(),
+      flags['validity-start'],
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
