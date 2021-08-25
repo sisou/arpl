@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeRecover extends RpcCommand {
-  static description = 'Recover stopped stake to the account (unstake)'
+  static description = 'Recover inactive stake to the account (unstake)'
 
   static args = [{
     name: 'wallet',
@@ -18,6 +18,9 @@ export default class StakeRecover extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    recipient: flags.string({
+      description: 'Address to receive stake (default: sender address)',
+    }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',
       default: 0,
@@ -39,7 +42,7 @@ export default class StakeRecover extends RpcCommand {
 
     const hash = await this.call(StakeRecover, `${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [
       args.wallet,
-      args.wallet,
+      flags['recipient'] || args.wallet,
       args.value,
       flags.fee,
       flags['validity-start'].toString(),

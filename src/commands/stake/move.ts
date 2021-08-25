@@ -2,26 +2,16 @@ import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeMove extends RpcCommand {
-  static description = 'Move stake between validators (rededicate)'
+  static description = 'Move stake to another validator (update)'
 
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account that owns the stake',
     required: true,
   }, {
-    name: 'from_validator_id',
-    description: 'ID of the validator to move stake from',
+    name: 'new_validator_address',
+    description: 'Address of the validator to move stake to',
     required: true,
-  }, {
-    name: 'to_validator_id',
-    description: 'ID of the validator to move stake to',
-    required: true,
-  }, {
-    // TODO: Use available amount by default
-    name: 'value',
-    description: '[NIM] Staking amount to move',
-    required: true,
-    parse: (input: string) => parseFloat(input) * 1e5,
   }]
 
   static flags = {
@@ -45,11 +35,9 @@ export default class StakeMove extends RpcCommand {
       flags['validity-start'] = await this.call(StakeMove, 'getBlockNumber') as number
     }
 
-    const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}RededicateTransaction`, [
+    const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}UpdateTransaction`, [
       args.wallet,
-      args.from_validator_id,
-      args.to_validator_id,
-      args.value,
+      args.new_validator_address,
       flags.fee,
       flags['validity-start'].toString(),
     ])
