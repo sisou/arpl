@@ -31,6 +31,11 @@ export default class AccountGet extends RpcCommand {
       };
     }
 
+    if (!result) {
+      this.log('Account not found')
+      return
+    }
+
     let type: 'basic' | 'vesting' | 'htlc' | undefined
     let account: { balance: number } | undefined
     if ('Basic' in result) {
