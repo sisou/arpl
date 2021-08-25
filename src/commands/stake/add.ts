@@ -1,23 +1,25 @@
 import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
-export default class StakeStop extends RpcCommand {
-  static description = 'Stop staking (retire)'
+export default class StakeAdd extends RpcCommand {
+  static description = 'Add stake to a staker'
 
   static args = [{
     name: 'wallet',
-    description: 'Address of unlocked account that owns the stake',
+    description: 'Address of unlocked account to add stake from',
     required: true,
   }, {
-    // TODO: Use available amount by default
     name: 'value',
-    description: 'NIM amount to retire',
+    description: 'NIM amount to add',
     required: true,
     parse: (input: string) => parseFloat(input) * 1e5,
   }]
 
   static flags = {
     ...RpcCommand.flags,
+    address: flags.string({
+      description: 'Staker address to add stake to (default: sender address)',
+    }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',
       default: 0,
@@ -31,14 +33,15 @@ export default class StakeStop extends RpcCommand {
   }
 
   async run() {
-    const {args, flags} = this.parse(StakeStop)
+    const {args, flags} = this.parse(StakeAdd)
 
     if (!flags['validity-start']) {
-      flags['validity-start'] = await this.call(StakeStop, 'getBlockNumber') as number
+      flags['validity-start'] = await this.call(StakeAdd, 'getBlockNumber') as number
     }
 
-    const hash = await this.call(StakeStop, `${flags.dry ? 'create' : 'send'}RetireTransaction`, [
+    const hash = await this.call(StakeAdd, `${flags.dry ? 'create' : 'send'}StakeTransaction`, [
       args.wallet,
+      flags.address || args.wallet,
       args.value,
       flags.fee,
       flags['validity-start'].toString(),

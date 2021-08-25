@@ -2,15 +2,11 @@ import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeRestart extends RpcCommand {
-  static description = 'Restart staking with a validator (reactivate)'
+  static description = 'Restart staking (reactivate)'
 
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account to restart staking with',
-    required: true,
-  }, {
-    name: 'validator_id',
-    description: 'ID of the validator to stake with',
     required: true,
   }, {
     // TODO: Use available amount by default
@@ -43,7 +39,6 @@ export default class StakeRestart extends RpcCommand {
 
     const hash = await this.call(StakeRestart, `${flags.dry ? 'create' : 'send'}ReactivateTransaction`, [
       args.wallet,
-      args.validator_id,
       args.value,
       flags.fee,
       flags['validity-start'].toString(),
