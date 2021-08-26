@@ -99,7 +99,7 @@ export type Validator = {
     balance: number;
     num_stakers: number,
     inactivity_flag?: number,
-    // stakers: Staker[];
+    stakers?: {[address: string]: number};
 }
 
 // export type Stakes = {
