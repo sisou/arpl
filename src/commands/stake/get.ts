@@ -1,8 +1,7 @@
 import {flags} from '@oclif/command'
-import cli from 'cli-ux'
-import chalk from 'chalk'
+// import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
-import {formatBalance} from '../../lib/formatting'
+// import {formatBalance} from '../../lib/formatting'
 import type {Staker} from '../../lib/server-types'
 
 export default class StakeGet extends RpcCommand {
@@ -22,15 +21,15 @@ export default class StakeGet extends RpcCommand {
   }
 
   async run() {
-    const {args, flags} = this.parse(StakeGet)
+    const {args} = this.parse(StakeGet)
 
     const staker = await this.call(StakeGet, 'getStaker', [
       args.staker_address,
     ]) as Staker
 
     // if (flags.plain) {
-      console.dir(staker, {depth: Infinity, maxArrayLength: Infinity})
-      return
+    console.dir(staker, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    //   return
     // }
   }
 }

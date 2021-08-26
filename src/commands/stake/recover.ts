@@ -31,7 +31,7 @@ export default class StakeRecover extends RpcCommand {
 
     const hash = await this.call(StakeRecover, `${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [
       args.wallet,
-      flags['recipient'] || args.wallet,
+      flags.recipient || args.wallet,
       args.value,
       flags.fee,
       flags['validity-start'],

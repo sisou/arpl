@@ -7,6 +7,6 @@ export default class AccountList extends RpcCommand {
     const accounts = await this.call(AccountList, 'listAccounts')
 
     // TODO: Display accounts nicely
-    console.dir(accounts, {depth: Infinity, maxArrayLength: Infinity})
+    console.dir(accounts, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
   }
 }

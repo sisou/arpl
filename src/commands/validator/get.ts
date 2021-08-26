@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
-import cli from 'cli-ux'
-import chalk from 'chalk'
+// import cli from 'cli-ux'
+// import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
-import {formatBalance} from '../../lib/formatting'
+// import {formatBalance} from '../../lib/formatting'
 import type {Validator} from '../../lib/server-types'
 
 export default class ValidatorGet extends RpcCommand {
@@ -33,8 +33,8 @@ export default class ValidatorGet extends RpcCommand {
     ]) as Validator
 
     // if (flags.plain) {
-      console.dir(validator, {depth: Infinity, maxArrayLength: Infinity})
-      return
+    console.dir(validator, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    //   return
     // }
   }
 }

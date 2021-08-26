@@ -23,7 +23,7 @@ export default class ValidatorDrop extends RpcCommand {
 
     const hash = await this.call(ValidatorDrop, `${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
       args.wallet,
-      flags['recipient'] || args.wallet,
+      flags.recipient || args.wallet,
       flags.fee,
       flags['validity-start'],
     ])
