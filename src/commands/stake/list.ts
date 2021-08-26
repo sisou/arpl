@@ -3,10 +3,9 @@ import cli from 'cli-ux'
 import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
 import {formatBalance} from '../../lib/formatting'
-import type {Stakes} from '../../lib/server-types'
 
 export default class StakeList extends RpcCommand {
-  static description = 'List validators and stakes'
+  static description = 'List validators and their stakes'
 
   static flags = {
     ...RpcCommand.flags,
@@ -18,12 +17,7 @@ export default class StakeList extends RpcCommand {
   async run() {
     const {flags} = this.parse(StakeList)
 
-    const stakes = await this.call(StakeList, 'listStakes') as any[] // Stakes
-
-    if (!stakes.length) {
-      this.log(chalk.bold(chalk.red('Method not implemented yet')))
-      return
-    }
+    const stakes = await this.call(StakeList, 'listStakes') as {[address: string]: number} // Stakes
 
     // if (flags.plain) {
       console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity})
