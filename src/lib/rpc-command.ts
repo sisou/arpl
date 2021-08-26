@@ -23,6 +23,10 @@ export abstract class RpcCommand extends Command {
         hidden: true,
         default: 5000,
       }),
+      auth: flags.string({
+        char: 'a',
+        hidden: true,
+      }),
     }
 
     protected $rpc = Rpc.getClient()

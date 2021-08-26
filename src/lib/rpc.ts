@@ -34,13 +34,17 @@ export class Socket extends WebsocketClient {
 export class Request {
   private count = 0
 
-  constructor(private url: string) {}
+  constructor(
+    private url: string,
+    private auth?: string,
+  ) {}
 
   public async call(method: string, params?: IWSRequestParams | undefined, _timeout?: number): Promise<unknown> {
     return fetch(this.url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...(this.auth ? {Authorization: this.auth} : {}),
       },
       body: JSON.stringify({
         jsonrpc: '2.0',
@@ -49,7 +53,16 @@ export class Request {
         id: this.count++,
       }),
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        if (response.status === 401) { // Unauthorized
+          throw new Error('Server requires authorization. Use the --auth argument to set username and password.')
+        }
+
+        throw new Error(`Response status code not OK: ${response.status} ${response.statusText}`)
+      }
+      return response.json()
+    })
     .then(data => {
       if (data.result) return data.result
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
@@ -62,21 +75,22 @@ export default class Rpc {
 
     private static url: URL
 
-    public static async init(url: URL, type: 'request'): Promise<Request>
+    public static async init(url: URL, type: 'request', auth?: string): Promise<Request>
 
-    public static async init(url: URL, type: 'socket'): Promise<Socket>
+    public static async init(url: URL, type: 'socket', auth?: string): Promise<Socket>
 
-    public static async init(url: URL, type: 'request' | 'socket') {
+    public static async init(url: URL, type: 'request' | 'socket', auth?: string) {
       this.url = url
 
       if (type === 'request') {
-        this.connection = new Request(url.href)
+        this.connection = new Request(url.href, auth)
         return this.connection
       }
 
       return new Promise((resolve, reject) => {
         const connection = new Socket(url.href, {
           max_reconnects: 0, // no limit
+          ...(auth ? {headers: {Authorization: auth}} : {}),
         })
 
         connection.on('open', () => {
@@ -84,7 +98,14 @@ export default class Rpc {
           resolve(this.connection)
         })
 
-        connection.on('error', (error: Error) => reject(error))
+        connection.on('error', (error: Error) => {
+          if (error.message.includes('401')) { // Unauthorized
+            reject(new Error('Server requires authorization. Use the --auth argument to set username and password.'))
+            return
+          }
+
+          reject(error)
+        })
       })
     }
 

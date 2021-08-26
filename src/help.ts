@@ -11,6 +11,7 @@ export default class MyHelpClass extends Help {
       ['-u, --url', 'The URL of the RPC server, overwrites host and port options (default: [http|ws]://localhost:8648[/ws])'],
       ['-h, --host', 'Hostname of the RPC server (default: localhost)'],
       ['-p, --port', 'Port of the RPC server (default: 8648)'],
+      ['-a, --auth', '<username:password> for RPC authorization (default: none)'],
     ], {
       stripAnsi: this.opts.stripAnsi,
       maxWidth: this.opts.maxWidth - 2,
