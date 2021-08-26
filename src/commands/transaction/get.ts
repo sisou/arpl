@@ -16,6 +16,6 @@ export default class TransactionGet extends RpcCommand {
 
     const result = await this.call(TransactionGet, 'getTransactionByHash', [args.hash])
 
-    console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
+    console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
   }
 }

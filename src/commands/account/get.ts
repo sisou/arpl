@@ -52,7 +52,7 @@ export default class AccountGet extends RpcCommand {
     this.log(`Type: ${type}`)
     this.log(`Balance: ${formatBalance(account.balance)}`)
     if (type !== 'basic') {
-      console.dir(account, {depth: Infinity, maxArrayLength: Infinity})
+      console.dir(account, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
     }
   }
 }

@@ -14,7 +14,7 @@ export default class BlockGet extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     full: flags.boolean({
-      description: 'Include block body in information (transactions, etc.)',
+      description: 'Include block body (transactions, etc.)',
       default: false,
     }),
   }
@@ -39,6 +39,6 @@ export default class BlockGet extends RpcCommand {
 
     const result = await this.call(BlockGet, method, params)
 
-    console.dir(result, {depth: Infinity, maxArrayLength: Infinity})
+    console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
   }
 }

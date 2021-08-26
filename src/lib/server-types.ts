@@ -96,13 +96,13 @@ export type Staker = {
 }
 
 export type Validator = {
-    address: Address,
-    warm_key: Address,
-    validator_key: string,
-    reward_address: Address,
-    signal_data?: string,
+    address: Address;
+    warm_key: Address;
+    validator_key: string;
+    reward_address: Address;
+    signal_data?: string;
     balance: Coin;
-    num_stakers: number,
-    inactivity_flag?: number,
-    stakers?: Stakes,
+    num_stakers: number;
+    inactivity_flag?: number;
+    stakers?: Stakes;
 }

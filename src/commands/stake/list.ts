@@ -1,9 +1,9 @@
 import {flags} from '@oclif/command'
-import cli from 'cli-ux'
-import chalk from 'chalk'
+// import cli from 'cli-ux'
+// import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
-import {formatBalance} from '../../lib/formatting'
-import { Stakes } from '../../lib/server-types'
+// import {formatBalance} from '../../lib/formatting'
+import {Stakes} from '../../lib/server-types'
 
 export default class StakeList extends RpcCommand {
   static description = 'List validators and their stakes'
@@ -16,13 +16,13 @@ export default class StakeList extends RpcCommand {
   }
 
   async run() {
-    const {flags} = this.parse(StakeList)
+    // const {flags} = this.parse(StakeList)
 
     const stakes = await this.call(StakeList, 'listStakes') as Stakes
 
     // if (flags.plain) {
-      console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity})
-      return
+    console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    //   return
     // }
 
     // TODO: Highlight own validator
