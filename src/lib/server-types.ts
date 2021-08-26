@@ -1,18 +1,21 @@
 export const STAKING_CONTRACT_ADDRESS = 'NQ38 STAK 1NG0 0000 0000 C0NT RACT 0000 0000'
 
+export type Address = string
+export type Coin = number
+
 export type Transaction = {
     blockNumber: number;
     confirmations: number;
     data: string;
-    fee: number;
+    fee: Coin;
     flags: number;
-    from: string;
+    from: Address;
     hash: string;
     proof: string;
     timestamp: number;
-    to: string;
+    to: Address;
     validityStartHeight: number;
-    value: number;
+    value: Coin;
 }
 
 export enum BlockType {
@@ -37,7 +40,7 @@ export type MicroBlock = {
     producer: {
         publicKey: string;
         slotNumber: number;
-        validatorId: string;
+        validator: Address;
     };
     seed: string;
     stateRoot: string;
@@ -71,7 +74,7 @@ export type MacroBlock = {
         firstSlotNumber: number;
         numSlots: number;
         publicKey: string;
-        validatorId: string;
+        validator: Address;
     }[];
     stateRoot: string;
     timestamp: number;
@@ -82,28 +85,24 @@ export type MacroBlock = {
 
 export type Block = MicroBlock | MacroBlock
 
+export type Stakes = Record<Address, Coin>
+
 export type Staker = {
-    address: string;
-    active_stake: number;
-    inactive_stake: number;
-    delegation?: string;
+    address: Address;
+    active_stake: Coin;
+    inactive_stake: Coin;
+    delegation?: Address;
     retire_time: number;
 }
 
 export type Validator = {
-    address: string,
-    warm_key: string,
+    address: Address,
+    warm_key: Address,
     validator_key: string,
-    reward_address: string,
+    reward_address: Address,
     signal_data?: string,
-    balance: number;
+    balance: Coin;
     num_stakers: number,
     inactivity_flag?: number,
-    stakers?: {[address: string]: number};
+    stakers?: Stakes,
 }
-
-// export type Stakes = {
-//     activeValidators: ValidatorStake[];
-//     inactiveStakes: (Stake & { retire_time: number })[];
-//     inactiveValidators: ValidatorStake[];
-// }
