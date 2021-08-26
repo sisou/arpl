@@ -22,6 +22,10 @@ export default class ValidatorNew extends RpcCommand {
     'reward-address': flags.string({
       description: 'Reward address for the validator (default: sending address)',
     }),
+    'signal-data': flags.string({
+      description: '32-byte signal data (default: none)',
+      default: '',
+    }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',
       default: 0,
@@ -43,6 +47,7 @@ export default class ValidatorNew extends RpcCommand {
       flags['warm-address'] || args.wallet,
       args.secret_key,
       flags['reward-address'] || args.wallet,
+      flags['signal-data'],
       flags.fee,
       flags['validity-start'],
     ])

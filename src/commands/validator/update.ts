@@ -45,7 +45,7 @@ export default class ValidatorUpdate extends RpcCommand {
       flags['warm-address'] || null,
       flags['secret-key'] || null,
       flags['reward-address'] || null,
-      flags['signal-data'] || null,
+      typeof flags['signal-data'] === 'string' ? flags['signal-data'] : null,
       flags.fee,
       flags['validity-start'],
     ])
