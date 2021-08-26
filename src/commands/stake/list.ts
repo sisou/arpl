@@ -3,6 +3,7 @@ import cli from 'cli-ux'
 import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
 import {formatBalance} from '../../lib/formatting'
+import { Stakes } from '../../lib/server-types'
 
 export default class StakeList extends RpcCommand {
   static description = 'List validators and their stakes'
@@ -17,7 +18,7 @@ export default class StakeList extends RpcCommand {
   async run() {
     const {flags} = this.parse(StakeList)
 
-    const stakes = await this.call(StakeList, 'listStakes') as {[address: string]: number} // Stakes
+    const stakes = await this.call(StakeList, 'listStakes') as Stakes
 
     // if (flags.plain) {
       console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity})
