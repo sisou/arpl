@@ -22,7 +22,7 @@ export default class ValidatorUpdate extends RpcCommand {
       description: 'New secret key for the validator (default: no change)',
     }),
     'signal-data': flags.string({
-      description: 'New 32 byte signal data (default: no change)',
+      description: 'New 32-byte signal data (default: no change)',
     }),
     fee: flags.integer({
       description: 'Fee in Luna (default: 0)',

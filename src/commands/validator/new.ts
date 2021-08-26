@@ -17,7 +17,7 @@ export default class ValidatorNew extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     'warm-address': flags.string({
-      description: 'Address of the warm key to sign unparking transactions (default: sending address)',
+      description: 'Address of the warm key to sign retire, reactivate & unparking transactions (default: sending address)',
     }),
     'reward-address': flags.string({
       description: 'Reward address for the validator (default: sending address)',
