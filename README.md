@@ -59,6 +59,7 @@ USAGE
 * [`arpl raw COMMAND [OPTIONS]`](#arpl-raw-command-options)
 * [`arpl repl`](#arpl-repl)
 * [`arpl stake:add WALLET VALUE`](#arpl-stakeadd-wallet-value)
+* [`arpl stake:get STAKER_ADDRESS`](#arpl-stakeget-staker_address)
 * [`arpl stake:list`](#arpl-stakelist)
 * [`arpl stake:move WALLET NEW_VALIDATOR_ADDRESS`](#arpl-stakemove-wallet-new_validator_address)
 * [`arpl stake:recover WALLET VALUE`](#arpl-stakerecover-wallet-value)
@@ -69,6 +70,7 @@ USAGE
 * [`arpl transaction:get HASH`](#arpl-transactionget-hash)
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
 * [`arpl validator:drop WALLET`](#arpl-validatordrop-wallet)
+* [`arpl validator:get VALIDATOR_ADDRESS`](#arpl-validatorget-validator_address)
 * [`arpl validator:new WALLET SECRET_KEY`](#arpl-validatornew-wallet-secret_key)
 * [`arpl validator:reactivate WALLET WARM_SECRET_KEY`](#arpl-validatorreactivate-wallet-warm_secret_key)
 * [`arpl validator:retire WALLET WARM_SECRET_KEY`](#arpl-validatorretire-wallet-warm_secret_key)
@@ -215,7 +217,7 @@ ARGUMENTS
   NUMBER_OR_HASH  [default: latest] Block number or hash of the block to get
 
 OPTIONS
-  --full  Include block body in information (transactions, etc.)
+  --full  Include block body (transactions, etc.)
 ```
 
 _See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/block/get.ts)_
@@ -297,9 +299,29 @@ ALIASES
 
 _See code: [src/commands/stake/add.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/add.ts)_
 
+## `arpl stake:get STAKER_ADDRESS`
+
+Show information for a staker
+
+```
+USAGE
+  $ arpl stake:get STAKER_ADDRESS
+
+ARGUMENTS
+  STAKER_ADDRESS  Address of staker to show information for
+
+OPTIONS
+  --plain  Display plain command output
+
+ALIASES
+  $ arpl staker:get
+```
+
+_See code: [src/commands/stake/get.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/get.ts)_
+
 ## `arpl stake:list`
 
-List validators and stakes
+List validators and their stakes
 
 ```
 USAGE
@@ -499,6 +521,24 @@ OPTIONS
 ```
 
 _See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/drop.ts)_
+
+## `arpl validator:get VALIDATOR_ADDRESS`
+
+Show information for a validator
+
+```
+USAGE
+  $ arpl validator:get VALIDATOR_ADDRESS
+
+ARGUMENTS
+  VALIDATOR_ADDRESS  Address of validator to show information for
+
+OPTIONS
+  --include-stakers  Include a list of the validator's stakers
+  --plain            Display plain command output
+```
+
+_See code: [src/commands/validator/get.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/get.ts)_
 
 ## `arpl validator:new WALLET SECRET_KEY`
 
