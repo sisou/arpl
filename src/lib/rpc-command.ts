@@ -29,6 +29,20 @@ export abstract class RpcCommand extends Command {
       }),
     }
 
+    static txFlags = {
+      fee: flags.integer({
+        description: 'Fee in Luna (default: 0)',
+        default: 0,
+      }),
+      'validity-start': flags.string({
+        description: 'Validity start height of the transaction',
+        default: '+0',
+      }),
+      dry: flags.boolean({
+        description: 'Return serialized transaction without sending it',
+      }),
+    }
+
     protected $rpc = Rpc.getClient()
 
     protected parse<F, A extends {

@@ -24,17 +24,7 @@ export default class ValidatorUpdate extends RpcCommand {
     'signal-data': flags.string({
       description: 'New 32-byte signal data (default: no change)',
     }),
-    fee: flags.integer({
-      description: 'Fee in Luna (default: 0)',
-      default: 0,
-    }),
-    'validity-start': flags.string({
-      description: 'Validity start height of the transaction (default: latest)',
-      default: '+0',
-    }),
-    dry: flags.boolean({
-      description: 'Return serialized transaction without sending it',
-    }),
+    ...RpcCommand.txFlags,
   }
 
   async run() {
