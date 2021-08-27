@@ -1,4 +1,3 @@
-import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class TransactionSend extends RpcCommand {
@@ -23,17 +22,7 @@ export default class TransactionSend extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
-    fee: flags.integer({
-      description: 'Fee in Luna (default: 0)',
-      default: 0,
-    }),
-    'validity-start': flags.string({
-      description: 'Validity start height of the transaction (default: latest)',
-      default: '+0',
-    }),
-    dry: flags.boolean({
-      description: 'Return serialized transaction without sending it',
-    }),
+    ...RpcCommand.txFlags,
   }
 
   async run() {
