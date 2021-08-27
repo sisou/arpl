@@ -4,6 +4,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeAdd extends RpcCommand {
   static description = 'Add stake to a staker'
 
+  static aliases = ['staker:stake']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account to add stake from',

@@ -3,6 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeStop extends RpcCommand {
   static description = 'Stop staking (retire)'
 
+  static aliases = ['staker:retire']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account that owns the stake',

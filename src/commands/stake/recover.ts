@@ -4,6 +4,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeRecover extends RpcCommand {
   static description = 'Recover inactive stake to the account (unstake)'
 
+  static aliases = ['staker:unstake']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account that owns the stake',

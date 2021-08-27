@@ -3,6 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeStart extends RpcCommand {
   static description = 'Start staking with a validator (new staker)'
 
+  static aliases = ['staker:new']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account to start staking from',
