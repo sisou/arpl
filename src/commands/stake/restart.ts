@@ -3,6 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeRestart extends RpcCommand {
   static description = 'Restart staking (reactivate)'
 
+  static aliases = ['staker:reactivate']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account to restart staking with',

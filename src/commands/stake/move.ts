@@ -3,6 +3,8 @@ import {RpcCommand} from '../../lib/rpc-command'
 export default class StakeMove extends RpcCommand {
   static description = 'Move stake to another validator (update)'
 
+  static aliases = ['staker:update']
+
   static args = [{
     name: 'wallet',
     description: 'Address of unlocked account that owns the stake',
