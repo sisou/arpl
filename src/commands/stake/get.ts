@@ -7,6 +7,8 @@ import type {Staker} from '../../lib/server-types'
 export default class StakeGet extends RpcCommand {
   static description = 'Show information for a staker'
 
+  static aliases = ['staker:get']
+
   static args = [{
     name: 'staker_address',
     description: 'Address of staker to show information for',
