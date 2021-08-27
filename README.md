@@ -289,7 +289,10 @@ OPTIONS
   --address=address                Staker address to add stake to (default: sender address)
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:stake
 ```
 
 _See code: [src/commands/stake/add.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/add.ts)_
@@ -323,7 +326,10 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:update
 ```
 
 _See code: [src/commands/stake/move.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/move.ts)_
@@ -344,7 +350,10 @@ OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --recipient=recipient            Address to receive stake (default: sender address)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:unstake
 ```
 
 _See code: [src/commands/stake/recover.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/recover.ts)_
@@ -364,7 +373,10 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:reactivate
 ```
 
 _See code: [src/commands/stake/restart.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/restart.ts)_
@@ -385,7 +397,10 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:new
 ```
 
 _See code: [src/commands/stake/start.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/start.ts)_
@@ -405,7 +420,10 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl staker:retire
 ```
 
 _See code: [src/commands/stake/stop.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/stake/stop.ts)_
@@ -431,6 +449,9 @@ USAGE
 
 ARGUMENTS
   HASH  Transaction hash of the transaction to get
+
+ALIASES
+  $ arpl tx:get
 ```
 
 _See code: [src/commands/transaction/get.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/transaction/get.ts)_
@@ -451,7 +472,10 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+ALIASES
+  $ arpl tx:send
 ```
 
 _See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/transaction/send.ts)_
@@ -471,7 +495,7 @@ OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --recipient=recipient            Address to receive validator deposit (default: sender address)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
 _See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/drop.ts)_
@@ -492,8 +516,11 @@ OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --reward-address=reward-address  Reward address for the validator (default: sending address)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
-  --warm-address=warm-address      Address of the warm key to sign unparking transactions (default: sending address)
+  --signal-data=signal-data        32-byte signal data (default: none)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+
+  --warm-address=warm-address      Address of the warm key to sign retire, reactivate & unparking transactions (default:
+                                   sending address)
 ```
 
 _See code: [src/commands/validator/new.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/new.ts)_
@@ -513,7 +540,7 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
 _See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/reactivate.ts)_
@@ -533,7 +560,7 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
 _See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/retire.ts)_
@@ -553,7 +580,7 @@ ARGUMENTS
 OPTIONS
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
 _See code: [src/commands/validator/unpark.ts](https://github.com/sisou/arpl/blob/v0.4.0/src/commands/validator/unpark.ts)_
@@ -574,8 +601,8 @@ OPTIONS
   --fee=fee                        Fee in Luna (default: 0)
   --reward-address=reward-address  New reward address for the validator (default: no change)
   --secret-key=secret-key          New secret key for the validator (default: no change)
-  --signal-data=signal-data        New 32 byte signal data (default: no change)
-  --validity-start=validity-start  Validity start height of the transaction (default: latest)
+  --signal-data=signal-data        New 32-byte signal data (default: no change)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
   --warm-address=warm-address      New address of the warm key to sign unparking transactions (default: no change)
 ```
 
