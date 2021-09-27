@@ -1,5 +1,6 @@
 import {RpcCommand} from '../../lib/rpc-command'
 import {formatBalance} from '../../lib/formatting'
+import { Account } from '../../lib/server-types'
 
 export default class AccountGet extends RpcCommand {
   static description = 'Show account information'
@@ -17,41 +18,11 @@ export default class AccountGet extends RpcCommand {
   async run() {
     const {args} = this.parse(AccountGet)
 
-    const result = await this.call(AccountGet, 'getAccount', [args.address]) as {
-      Basic: {
-        balance: number;
-      };
-    } | {
-      Vesting: {
-        balance: number;
-      };
-    } | {
-      HTLC: {
-        balance: number;
-      };
-    }
+    const account = await this.call(AccountGet, 'getAccount', [args.address]) as Account
 
-    if (!result) {
-      this.log('Account not found')
-      return
-    }
-
-    let type: 'basic' | 'vesting' | 'htlc' | undefined
-    let account: { balance: number } | undefined
-    if ('Basic' in result) {
-      type = 'basic'
-      account = result.Basic
-    } else if ('Vesting' in result) {
-      type = 'vesting'
-      account = result.Vesting
-    } else if ('HTLC' in result) {
-      type = 'htlc'
-      account = result.HTLC
-    } else throw new Error('Unknown account type')
-
-    this.log(`Type: ${type}`)
+    this.log(`Type: ${account.type}`)
     this.log(`Balance: ${formatBalance(account.balance)}`)
-    if (type !== 'basic') {
+    if (account.type !== 'basic') {
       console.dir(account, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
     }
   }

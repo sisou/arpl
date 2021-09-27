@@ -3,6 +3,43 @@ export const STAKING_CONTRACT_ADDRESS = 'NQ38 STAK 1NG0 0000 0000 C0NT RACT 0000
 export type Address = string
 export type Coin = number
 
+export enum AccountType {
+    BASIC = 'basic',
+    VESTING = 'vesting',
+    HTLC = 'htlc',
+}
+
+export type BasicAccount = {
+    type: AccountType.BASIC;
+    address: Address;
+    balance: Coin;
+}
+
+export type VestingAccount = {
+    type: AccountType.VESTING;
+    address: Address;
+    balance: Coin;
+    owner: Address;
+    vestingStart: number;
+    vestingStepBlocks: number;
+    vestingStepAmount: Coin;
+    vestingTotalAmount: Coin;
+}
+
+export type HtlcAccount = {
+    type: AccountType.HTLC;
+    address: Address;
+    balance: Coin;
+    sender: Address;
+    recipient: Address;
+    hashRoot: string;
+    hashCount: number;
+    timeout: number;
+    totalAmount: Coin;
+}
+
+export type Account = BasicAccount | VestingAccount | HtlcAccount
+
 export type Transaction = {
     blockNumber: number;
     confirmations: number;
