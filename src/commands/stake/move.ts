@@ -17,13 +17,18 @@ export default class StakeMove extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    ...RpcCommand.stakingSignallingFlags,
     ...RpcCommand.txFlags,
   }
 
   async run() {
     const {args, flags} = this.parse(StakeMove)
 
+    const from_active_balance = await this.getFromActiveBalance(args.wallet, flags)
+
     const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}UpdateTransaction`, [
+      from_active_balance === null ? (flags['fee-wallet'] || args.wallet) : null,
+      from_active_balance,
       args.wallet,
       args.new_validator_address,
       flags.fee,

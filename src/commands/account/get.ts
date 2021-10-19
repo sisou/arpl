@@ -1,6 +1,6 @@
 import {RpcCommand} from '../../lib/rpc-command'
 import {formatBalance} from '../../lib/formatting'
-import { Account } from '../../lib/server-types'
+import {Account} from '../../lib/server-types'
 
 export default class AccountGet extends RpcCommand {
   static description = 'Show account information'
@@ -18,7 +18,7 @@ export default class AccountGet extends RpcCommand {
   async run() {
     const {args} = this.parse(AccountGet)
 
-    const account = await this.call(AccountGet, 'getAccount', [args.address]) as Account
+    const account = await this.call(AccountGet, 'getAccountByAddress', [args.address]) as Account
 
     this.log(`Type: ${account.type}`)
     this.log(`Balance: ${formatBalance(account.balance)}`)

@@ -62,17 +62,12 @@ export enum BlockType {
 
 export type MicroBlock = {
     batch: number;
-    blockNumber: number;
-    blockType: BlockType.MICRO;
-    bodyRoot: string;
+    number: number;
+    type: BlockType.MICRO;
+    bodyHash: string;
     epoch: number;
-    extra_data: string;
-    fork_proofs: any[];
+    extraData: string;
     hash: string;
-    justification: {
-        signature: string;
-        viewChangeProof: any | null;
-    };
     parentHash: string;
     producer: {
         publicKey: string;
@@ -80,22 +75,41 @@ export type MicroBlock = {
         validator: Address;
     };
     seed: string;
-    stateRoot: string;
+    stateHash: string;
     timestamp: number;
+    view: number;
+    forkProofs?: any[];
+    justification?: {
+        signature: string;
+        viewChangeProof: any | null;
+    };
     transactions?: Transaction[];
-    type: BlockType.MICRO;
-    viewNumber: number;
 }
 
 export type MacroBlock = {
     batch: number;
-    blockNumber: number;
-    blockType: BlockType.MACRO;
-    bodyRoot: string;
+    number: number;
+    type: BlockType.MACRO;
+    bodyHash: string;
     epoch: number;
+    extraData: string;
     hash: string;
-    is_election_block: boolean;
-    justification: {
+    isElectionBlock: boolean;
+    parentHash: string;
+    parentElectionHash: string;
+    seed: string;
+    stateHash: string;
+    timestamp: number;
+    view: number;
+    lostRewardSet?: [];
+    disabledSet?: [];
+    slots?: {
+        firstSlotNumber: number;
+        numSlots: number;
+        publicKey: string;
+        validator: Address;
+    }[];
+    justification?: {
         round: number;
         sig: {
             signature: string;
@@ -103,21 +117,7 @@ export type MacroBlock = {
         };
         votes: number;
     };
-    lost_reward_set: [];
-    parentHash: string;
-    parent_election_hash: string;
-    seed: string;
-    slots: {
-        firstSlotNumber: number;
-        numSlots: number;
-        publicKey: string;
-        validator: Address;
-    }[];
-    stateRoot: string;
-    timestamp: number;
     transactions?: Transaction[];
-    type: BlockType.MACRO;
-    viewNumber: number;
 }
 
 export type Block = MicroBlock | MacroBlock
@@ -126,20 +126,20 @@ export type Stakes = Record<Address, Coin>
 
 export type Staker = {
     address: Address;
-    active_stake: Coin;
-    inactive_stake: Coin;
+    activeStake: Coin;
+    inactiveStake: Coin;
     delegation?: Address;
-    retire_time: number;
+    retireTime: number;
 }
 
 export type Validator = {
     address: Address;
-    warm_key: Address;
-    validator_key: string;
-    reward_address: Address;
-    signal_data?: string;
+    warmAddress: Address;
+    validatorKey: string;
+    rewardAddress: Address;
+    signalData?: string;
     balance: Coin;
-    num_stakers: number;
-    inactivity_flag?: number;
+    numStakers: number;
+    inactivityFlag?: number;
     stakers?: Stakes;
 }

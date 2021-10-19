@@ -31,7 +31,6 @@ export default class Raw extends RpcCommand {
       if (arg === 'false') return false
 
       if (arg === 'null') return null
-      if (arg === 'undefined') return undefined
 
       return arg
     })

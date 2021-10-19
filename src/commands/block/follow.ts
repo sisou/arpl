@@ -18,15 +18,15 @@ export default class BlockFollow extends RpcCommand {
       const batchesPerEpoch = Math.ceil(block.batch / block.epoch)
 
       this.log([
-        block.blockType,
-        `#${block.blockNumber}.${block.viewNumber}`,
+        block.type,
+        `#${block.number}.${block.view}`,
         block.hash,
         'producer' in block /* micro block */ ?
           block.producer.slotNumber.toString().padStart(3, ' ') /* macro block */ :
           '   ',
-        block.blockType === 'micro' ?
+        block.type === 'micro' ?
           `${block.transactions!.length} tx${block.transactions!.length === 1 ? '' : 's'}` :
-          block.is_election_block ?
+          block.isElectionBlock ?
             `election (epoch ${block.epoch} => ${block.epoch + 1})` :
             `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})`,
       ].join(' ｜'))

@@ -25,7 +25,7 @@ export default class StakeGet extends RpcCommand {
   async run() {
     const {args} = this.parse(StakeGet)
 
-    const staker = await this.call(StakeGet, 'getStaker', [
+    const staker = await this.call(StakeGet, 'getStakerByAddress', [
       args.staker_address,
     ]) as Staker
 

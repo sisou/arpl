@@ -16,7 +16,7 @@ export default class ValidatorGet extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
-    'include-stakers': flags.boolean({
+    stakers: flags.boolean({
       description: 'Include a list of the validator\'s stakers',
     }),
     plain: flags.boolean({
@@ -27,9 +27,9 @@ export default class ValidatorGet extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorGet)
 
-    const validator = await this.call(ValidatorGet, 'getValidator', [
+    const validator = await this.call(ValidatorGet, 'getValidatorByAddress', [
       args.validator_address,
-      flags['include-stakers'],
+      flags.stakers,
     ]) as Validator
 
     // if (flags.plain) {

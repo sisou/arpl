@@ -1,3 +1,4 @@
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeStart extends RpcCommand {
@@ -23,6 +24,9 @@ export default class StakeStart extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     ...RpcCommand.txFlags,
+    'staker-wallet': flags.string({
+      description: 'Address of unlocked staker account (default: WALLET)',
+    }),
   }
 
   async run() {
@@ -30,6 +34,7 @@ export default class StakeStart extends RpcCommand {
 
     const hash = await this.call(StakeStart, `${flags.dry ? 'create' : 'send'}NewStakerTransaction`, [
       args.wallet,
+      flags['staker-wallet'] || args.wallet,
       args.validator_address,
       args.value,
       flags.fee,

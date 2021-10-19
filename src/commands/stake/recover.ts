@@ -21,7 +21,7 @@ export default class StakeRecover extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     recipient: flags.string({
-      description: 'Address to receive stake (default: sender address)',
+      description: 'Address to receive stake (default: WALLET)',
     }),
     ...RpcCommand.txFlags,
   }
