@@ -10,7 +10,7 @@ export default class BlockFollow extends RpcCommand {
     const subscriptionId = await this.call(BlockFollow, 'headSubscribe') as number // Throws when not in REPL
     this.log('Subscribed to headers');
 
-    (this.$rpc as Socket).on('subscription', async (params: {result: string; subscription: number}) => {
+    (this.$rpc as Socket).on('headSubscribe', async (params: {result: string; subscription: number}) => {
       if (params.subscription !== subscriptionId) return
 
       const block = await this.call(BlockFollow, 'getBlockByHash', [params.result, true]) as Block
