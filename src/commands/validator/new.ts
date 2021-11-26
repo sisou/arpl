@@ -16,8 +16,11 @@ export default class ValidatorNew extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    'validator-address': flags.string({
+      description: 'Address of unlocked account to own the validator (default: sending address)',
+    }),
     'warm-address': flags.string({
-      description: 'Address of the warm key to sign retire, reactivate & unparking transactions (default: sending address)',
+      description: 'Address of the warm key that signs retire, reactivate & unparking transactions (default: sending address)',
     }),
     'reward-address': flags.string({
       description: 'Reward address for the validator (default: sending address)',
@@ -34,6 +37,7 @@ export default class ValidatorNew extends RpcCommand {
 
     const hash = await this.call(ValidatorNew, `${flags.dry ? 'create' : 'send'}NewValidatorTransaction`, [
       args.wallet,
+      flags['validator-address'] || args.wallet,
       flags['warm-address'] || args.wallet,
       args.secret_key,
       flags['reward-address'] || args.wallet,

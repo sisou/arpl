@@ -8,6 +8,10 @@ export default class ValidatorReactivate extends RpcCommand {
     description: 'Address of unlocked account to send transaction from',
     required: true,
   }, {
+    name: 'validator_address',
+    description: 'Address of the validator',
+    required: true,
+  }, {
     name: 'warm_secret_key',
     description: 'Secret key of the warm address',
     required: true,
@@ -23,6 +27,7 @@ export default class ValidatorReactivate extends RpcCommand {
 
     const hash = await this.call(ValidatorReactivate, `${flags.dry ? 'create' : 'send'}ReactivateValidatorTransaction`, [
       args.wallet,
+      args.validator_address,
       args.warm_secret_key,
       flags.fee,
       flags['validity-start'],
