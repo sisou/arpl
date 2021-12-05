@@ -5,15 +5,15 @@ export default class ValidatorRetire extends RpcCommand {
 
   static args = [{
     name: 'wallet',
-    description: 'Address of unlocked account to send transaction from',
+    description: 'Address of unlocked account to send transaction from (fees are taken from this account)',
     required: true,
   }, {
     name: 'validator_address',
     description: 'Address of the validator',
     required: true,
   }, {
-    name: 'warm_secret_key',
-    description: 'Secret key of the warm address',
+    name: 'signing_secret_key',
+    description: 'Secret key used to sign the reactivate transaction',
     required: true,
   }]
 
@@ -28,7 +28,7 @@ export default class ValidatorRetire extends RpcCommand {
     const hash = await this.call(ValidatorRetire, `${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`, [
       args.wallet,
       args.validator_address,
-      args.warm_secret_key,
+      args.signing_secret_key,
       flags.fee,
       flags['validity-start'],
     ])

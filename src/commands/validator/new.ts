@@ -6,21 +6,22 @@ export default class ValidatorNew extends RpcCommand {
 
   static args = [{
     name: 'wallet',
-    description: 'Address of unlocked account to send transaction from',
+    description: 'Address of unlocked account to send transaction from (deposit and fees are taken from this account)',
     required: true,
   }, {
-    name: 'secret_key',
-    description: 'Secret key of the new validator',
+    name: 'signing_secret_key',
+    description: 'Secret key used to sign Micro blocks and reactivate, retire & unpark transactions (default: sending address)',
+    required: true,
+  }, {
+    name: 'voting_secret_key',
+    description: 'BLS secret key used when signing votes (for a Macro block proposals, view changes, etc.)',
     required: true,
   }]
 
   static flags = {
     ...RpcCommand.flags,
     'validator-address': flags.string({
-      description: 'Address of unlocked account to own the validator (default: sending address)',
-    }),
-    'warm-address': flags.string({
-      description: 'Address of the warm key that signs retire, reactivate & unparking transactions (default: sending address)',
+      description: 'Address of unlocked account that will own the validator (default: sending address)',
     }),
     'reward-address': flags.string({
       description: 'Reward address for the validator (default: sending address)',
@@ -38,8 +39,8 @@ export default class ValidatorNew extends RpcCommand {
     const hash = await this.call(ValidatorNew, `${flags.dry ? 'create' : 'send'}NewValidatorTransaction`, [
       args.wallet,
       flags['validator-address'] || args.wallet,
-      flags['warm-address'] || args.wallet,
-      args.secret_key,
+      args.signing_secret_key,
+      args.voting_secret_key,
       flags['reward-address'] || args.wallet,
       flags['signal-data'],
       flags.fee,

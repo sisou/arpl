@@ -6,7 +6,7 @@ export default class ValidatorDrop extends RpcCommand {
 
   static args = [{
     name: 'wallet',
-    description: 'Address of unlocked validator owner account to send transaction from',
+    description: 'Address of unlocked account that owns the validator',
     required: true,
   }]
 
