@@ -21,7 +21,7 @@ $ npm install -g @sisou/albatross-remote
 $ arpl COMMAND
 running command...
 $ arpl (-v|--version|version)
-@sisou/albatross-remote/0.6.2 linux-x64 node-v14.18.1
+@sisou/albatross-remote/0.7.0 linux-x64 node-v14.18.1
 $ arpl --help [COMMAND]
 USAGE
   $ arpl COMMAND
@@ -71,10 +71,10 @@ USAGE
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
 * [`arpl validator:drop WALLET`](#arpl-validatordrop-wallet)
 * [`arpl validator:get VALIDATOR_ADDRESS`](#arpl-validatorget-validator_address)
-* [`arpl validator:new WALLET SECRET_KEY`](#arpl-validatornew-wallet-secret_key)
-* [`arpl validator:reactivate WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`](#arpl-validatorreactivate-wallet-validator_address-warm_secret_key)
-* [`arpl validator:retire WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`](#arpl-validatorretire-wallet-validator_address-warm_secret_key)
-* [`arpl validator:unpark WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`](#arpl-validatorunpark-wallet-validator_address-warm_secret_key)
+* [`arpl validator:new WALLET SIGNING_SECRET_KEY VOTING_SECRET_KEY`](#arpl-validatornew-wallet-signing_secret_key-voting_secret_key)
+* [`arpl validator:reactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorreactivate-wallet-validator_address-signing_secret_key)
+* [`arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorretire-wallet-validator_address-signing_secret_key)
+* [`arpl validator:unpark WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorunpark-wallet-validator_address-signing_secret_key)
 * [`arpl validator:update WALLET VALIDATOR_ADDRESS`](#arpl-validatorupdate-wallet-validator_address)
 
 ## `arpl account:create`
@@ -90,7 +90,7 @@ OPTIONS
   --unlock             Unlock the account after creation
 ```
 
-_See code: [src/commands/account/create.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/create.ts)_
+_See code: [src/commands/account/create.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/create.ts)_
 
 ## `arpl account:get ADDRESS`
 
@@ -104,7 +104,7 @@ ARGUMENTS
   ADDRESS  Address of the account to display
 ```
 
-_See code: [src/commands/account/get.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/get.ts)_
+_See code: [src/commands/account/get.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/get.ts)_
 
 ## `arpl account:import PRIVATEKEY`
 
@@ -122,7 +122,7 @@ OPTIONS
   --unlock             Unlock the account after import
 ```
 
-_See code: [src/commands/account/import.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/import.ts)_
+_See code: [src/commands/account/import.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/import.ts)_
 
 ## `arpl account:list`
 
@@ -133,7 +133,7 @@ USAGE
   $ arpl account:list
 ```
 
-_See code: [src/commands/account/list.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/list.ts)_
+_See code: [src/commands/account/list.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/list.ts)_
 
 ## `arpl account:lock ADDRESS`
 
@@ -147,7 +147,7 @@ ARGUMENTS
   ADDRESS  Address of the account to lock
 ```
 
-_See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/lock.ts)_
+_See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/lock.ts)_
 
 ## `arpl account:transactions ADDRESS`
 
@@ -175,7 +175,7 @@ ALIASES
   $ arpl account:txs
 ```
 
-_See code: [src/commands/account/transactions.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/transactions.ts)_
+_See code: [src/commands/account/transactions.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/transactions.ts)_
 
 ## `arpl account:unlock ADDRESS`
 
@@ -192,7 +192,7 @@ OPTIONS
   --password=password  Password to decrypt the key
 ```
 
-_See code: [src/commands/account/unlock.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/account/unlock.ts)_
+_See code: [src/commands/account/unlock.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/account/unlock.ts)_
 
 ## `arpl block:follow`
 
@@ -203,7 +203,7 @@ USAGE
   $ arpl block:follow
 ```
 
-_See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/block/follow.ts)_
+_See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/block/follow.ts)_
 
 ## `arpl block:get [NUMBER_OR_HASH]`
 
@@ -220,7 +220,7 @@ OPTIONS
   --full  Include block body (transactions, etc.)
 ```
 
-_See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/block/get.ts)_
+_See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/block/get.ts)_
 
 ## `arpl help [COMMAND]`
 
@@ -248,7 +248,7 @@ USAGE
   $ arpl peer:id
 ```
 
-_See code: [src/commands/peer/id.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/peer/id.ts)_
+_See code: [src/commands/peer/id.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/peer/id.ts)_
 
 ## `arpl raw COMMAND [OPTIONS]`
 
@@ -259,7 +259,7 @@ USAGE
   $ arpl raw COMMAND [OPTIONS]
 ```
 
-_See code: [src/commands/raw.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/raw.ts)_
+_See code: [src/commands/raw.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/raw.ts)_
 
 ## `arpl repl`
 
@@ -297,7 +297,7 @@ ALIASES
   $ arpl staker:stake
 ```
 
-_See code: [src/commands/stake/add.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/add.ts)_
+_See code: [src/commands/stake/add.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/add.ts)_
 
 ## `arpl stake:get STAKER_ADDRESS`
 
@@ -317,7 +317,7 @@ ALIASES
   $ arpl staker:get
 ```
 
-_See code: [src/commands/stake/get.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/get.ts)_
+_See code: [src/commands/stake/get.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/get.ts)_
 
 ## `arpl stake:list`
 
@@ -331,7 +331,7 @@ OPTIONS
   --plain  Display plain command output
 ```
 
-_See code: [src/commands/stake/list.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/list.ts)_
+_See code: [src/commands/stake/list.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/list.ts)_
 
 ## `arpl stake:move WALLET NEW_VALIDATOR_ADDRESS`
 
@@ -355,7 +355,7 @@ ALIASES
   $ arpl staker:update
 ```
 
-_See code: [src/commands/stake/move.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/move.ts)_
+_See code: [src/commands/stake/move.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/move.ts)_
 
 ## `arpl stake:recover WALLET VALUE`
 
@@ -379,7 +379,7 @@ ALIASES
   $ arpl staker:unstake
 ```
 
-_See code: [src/commands/stake/recover.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/recover.ts)_
+_See code: [src/commands/stake/recover.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/recover.ts)_
 
 ## `arpl stake:restart WALLET VALUE`
 
@@ -403,7 +403,7 @@ ALIASES
   $ arpl staker:reactivate
 ```
 
-_See code: [src/commands/stake/restart.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/restart.ts)_
+_See code: [src/commands/stake/restart.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/restart.ts)_
 
 ## `arpl stake:start WALLET VALIDATOR_ADDRESS VALUE`
 
@@ -428,7 +428,7 @@ ALIASES
   $ arpl staker:new
 ```
 
-_See code: [src/commands/stake/start.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/start.ts)_
+_See code: [src/commands/stake/start.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/start.ts)_
 
 ## `arpl stake:stop WALLET VALUE`
 
@@ -452,7 +452,7 @@ ALIASES
   $ arpl staker:retire
 ```
 
-_See code: [src/commands/stake/stop.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/stake/stop.ts)_
+_See code: [src/commands/stake/stop.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/stake/stop.ts)_
 
 ## `arpl status`
 
@@ -463,7 +463,7 @@ USAGE
   $ arpl status
 ```
 
-_See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/status.ts)_
+_See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/status.ts)_
 
 ## `arpl transaction:get HASH`
 
@@ -480,7 +480,7 @@ ALIASES
   $ arpl tx:get
 ```
 
-_See code: [src/commands/transaction/get.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/transaction/get.ts)_
+_See code: [src/commands/transaction/get.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/transaction/get.ts)_
 
 ## `arpl transaction:send WALLET RECIPIENT VALUE`
 
@@ -504,7 +504,7 @@ ALIASES
   $ arpl tx:send
 ```
 
-_See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/transaction/send.ts)_
+_See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/transaction/send.ts)_
 
 ## `arpl validator:drop WALLET`
 
@@ -515,7 +515,7 @@ USAGE
   $ arpl validator:drop WALLET
 
 ARGUMENTS
-  WALLET  Address of unlocked validator owner account to send transaction from
+  WALLET  Address of unlocked account that owns the validator
 
 OPTIONS
   --dry                            Return serialized transaction without sending it
@@ -524,7 +524,7 @@ OPTIONS
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
-_See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/drop.ts)_
+_See code: [src/commands/validator/drop.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/drop.ts)_
 
 ## `arpl validator:get VALIDATOR_ADDRESS`
 
@@ -542,46 +542,51 @@ OPTIONS
   --stakers  Include a list of the validator's stakers
 ```
 
-_See code: [src/commands/validator/get.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/get.ts)_
+_See code: [src/commands/validator/get.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/get.ts)_
 
-## `arpl validator:new WALLET SECRET_KEY`
+## `arpl validator:new WALLET SIGNING_SECRET_KEY VOTING_SECRET_KEY`
 
 Register a new validator (requires 10k NIM deposit)
 
 ```
 USAGE
-  $ arpl validator:new WALLET SECRET_KEY
+  $ arpl validator:new WALLET SIGNING_SECRET_KEY VOTING_SECRET_KEY
 
 ARGUMENTS
-  WALLET      Address of unlocked account to send transaction from
-  SECRET_KEY  Secret key of the new validator
+  WALLET              Address of unlocked account to send transaction from (deposit and fees are taken from this
+                      account)
+
+  SIGNING_SECRET_KEY  Secret key used to sign Micro blocks and retire, reactivate & unpark transactions (default:
+                      sending address)
+
+  VOTING_SECRET_KEY   BLS secret key used when signing votes (for Macro blocks and view changes)
 
 OPTIONS
   --dry                                  Return serialized transaction without sending it
   --fee=fee                              Fee in Luna (default: 0)
   --reward-address=reward-address        Reward address for the validator (default: sending address)
   --signal-data=signal-data              32-byte signal data (default: none)
-  --validator-address=validator-address  Address of unlocked account to own the validator (default: sending address)
-  --validity-start=validity-start        [default: +0] Validity start height of the transaction
 
-  --warm-address=warm-address            Address of the warm key that signs retire, reactivate & unparking transactions
-                                         (default: sending address)
+  --validator-address=validator-address  Address of unlocked account that will own the validator (default: sending
+                                         address)
+
+  --validity-start=validity-start        [default: +0] Validity start height of the transaction
 ```
 
-_See code: [src/commands/validator/new.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/new.ts)_
+_See code: [src/commands/validator/new.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/new.ts)_
 
-## `arpl validator:reactivate WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`
+## `arpl validator:reactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
 
 Reactivate an inactive validator
 
 ```
 USAGE
-  $ arpl validator:reactivate WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY
+  $ arpl validator:reactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
 
 ARGUMENTS
-  WALLET             Address of unlocked account to send transaction from
-  VALIDATOR_ADDRESS  Address of the validator
-  WARM_SECRET_KEY    Secret key of the warm address
+  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
+  VALIDATOR_ADDRESS   Address of the validator
+  SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
 
 OPTIONS
   --dry                            Return serialized transaction without sending it
@@ -589,20 +594,20 @@ OPTIONS
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
-_See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/reactivate.ts)_
+_See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/reactivate.ts)_
 
-## `arpl validator:retire WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`
+## `arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
 
 Retire an active validator
 
 ```
 USAGE
-  $ arpl validator:retire WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY
+  $ arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
 
 ARGUMENTS
-  WALLET             Address of unlocked account to send transaction from
-  VALIDATOR_ADDRESS  Address of the validator
-  WARM_SECRET_KEY    Secret key of the warm address
+  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
+  VALIDATOR_ADDRESS   Address of the validator
+  SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
 
 OPTIONS
   --dry                            Return serialized transaction without sending it
@@ -610,20 +615,20 @@ OPTIONS
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
-_See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/retire.ts)_
+_See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/retire.ts)_
 
-## `arpl validator:unpark WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY`
+## `arpl validator:unpark WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
 
 Unpark a parked validator
 
 ```
 USAGE
-  $ arpl validator:unpark WALLET VALIDATOR_ADDRESS WARM_SECRET_KEY
+  $ arpl validator:unpark WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
 
 ARGUMENTS
-  WALLET             Address of unlocked account to send transaction from
-  VALIDATOR_ADDRESS  Address of the validator
-  WARM_SECRET_KEY    Secret key of the warm address
+  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
+  VALIDATOR_ADDRESS   Address of the validator
+  SIGNING_SECRET_KEY  Secret key used to sign the unpark transaction
 
 OPTIONS
   --dry                            Return serialized transaction without sending it
@@ -631,7 +636,7 @@ OPTIONS
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
 ```
 
-_See code: [src/commands/validator/unpark.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/unpark.ts)_
+_See code: [src/commands/validator/unpark.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/unpark.ts)_
 
 ## `arpl validator:update WALLET VALIDATOR_ADDRESS`
 
@@ -642,20 +647,22 @@ USAGE
   $ arpl validator:update WALLET VALIDATOR_ADDRESS
 
 ARGUMENTS
-  WALLET             Address of unlocked account to send transaction from
+  WALLET             Address of unlocked account to send transaction from (fees are taken from this account)
   VALIDATOR_ADDRESS  Address of unlocked account that owns the validator
 
 OPTIONS
-  --dry                            Return serialized transaction without sending it
-  --fee=fee                        Fee in Luna (default: 0)
-  --reward-address=reward-address  New reward address for the validator (default: no change)
-  --secret-key=secret-key          New secret key for the validator (default: no change)
-  --signal-data=signal-data        New 32-byte signal data (default: no change)
-  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+  --dry                                    Return serialized transaction without sending it
+  --fee=fee                                Fee in Luna (default: 0)
+  --reward-address=reward-address          New reward address for the validator (default: no change)
+  --signal-data=signal-data                New 32-byte signal data (default: no change)
 
-  --warm-address=warm-address      New address of the warm key that signs retire, reactivate & unparking transactions
-                                   (default: no change)
+  --signing-secret-key=signing-secret-key  New secret key used to sign Micro blocks and retire, reactivate & unpark
+                                           transactions (default: no change)
+
+  --validity-start=validity-start          [default: +0] Validity start height of the transaction
+
+  --voting-secret-key=voting-secret-key    New BLS secret key used when signing votes (default: no change)
 ```
 
-_See code: [src/commands/validator/update.ts](https://github.com/sisou/arpl/blob/v0.6.2/src/commands/validator/update.ts)_
+_See code: [src/commands/validator/update.ts](https://github.com/sisou/arpl/blob/v0.7.0/src/commands/validator/update.ts)_
 <!-- commandsstop -->
