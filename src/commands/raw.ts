@@ -14,7 +14,7 @@ export default class Raw extends RpcCommand {
   static strict = false
 
   async run() {
-    const [id, ...argv] = this.argv.filter(arg => !arg.startsWith('-'))
+    const [id, ...argv] = this.argv.filter((arg, i, arr) => !arg.startsWith('-') && (!arr[i - 1].startsWith('-') || arr[i - 1].includes('=')))
 
     const params = argv.map((arg, index) => {
       let parseNumber = true
