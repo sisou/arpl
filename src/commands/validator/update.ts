@@ -17,7 +17,7 @@ export default class ValidatorUpdate extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     'signing-secret-key': flags.string({
-      description: 'New secret key used to sign Micro blocks and reactivate, retire & unpark transactions (default: no change)',
+      description: 'New secret key used to sign Micro blocks and retire, reactivate & unpark transactions (default: no change)',
     }),
     'reward-address': flags.string({
       description: 'New reward address for the validator (default: no change)',

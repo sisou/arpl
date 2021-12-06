@@ -10,11 +10,11 @@ export default class ValidatorNew extends RpcCommand {
     required: true,
   }, {
     name: 'signing_secret_key',
-    description: 'Secret key used to sign Micro blocks and reactivate, retire & unpark transactions (default: sending address)',
+    description: 'Secret key used to sign Micro blocks and retire, reactivate & unpark transactions (default: sending address)',
     required: true,
   }, {
     name: 'voting_secret_key',
-    description: 'BLS secret key used when signing votes (for a Macro block proposals, view changes, etc.)',
+    description: 'BLS secret key used when signing votes (for Macro blocks and view changes)',
     required: true,
   }]
 
