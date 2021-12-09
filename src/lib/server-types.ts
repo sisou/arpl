@@ -126,10 +126,8 @@ export type Stakes = Record<Address, Coin>
 
 export type Staker = {
     address: Address;
-    activeStake: Coin;
-    inactiveStake: Coin;
+    balance: Coin;
     delegation?: Address;
-    retireTime: number;
 }
 
 export type Validator = {

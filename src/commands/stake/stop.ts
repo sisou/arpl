@@ -1,9 +1,10 @@
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeStop extends RpcCommand {
-  static description = 'Stop staking (retire)'
+  static description = 'Stop staking (unstake)'
 
-  static aliases = ['staker:retire']
+  static aliases = ['staker:unstake']
 
   static args = [{
     name: 'wallet',
@@ -12,26 +13,25 @@ export default class StakeStop extends RpcCommand {
   }, {
     // TODO: Use available amount by default
     name: 'value',
-    description: 'NIM amount to retire',
+    description: 'NIM amount to unstake',
     required: true,
     parse: (input: string) => parseFloat(input) * 1e5,
   }]
 
   static flags = {
     ...RpcCommand.flags,
-    ...RpcCommand.stakingSignallingFlags,
+    recipient: flags.string({
+      description: 'Address to receive stake (default: WALLET)',
+    }),
     ...RpcCommand.txFlags,
   }
 
   async run() {
     const {args, flags} = this.parse(StakeStop)
 
-    const from_active_balance = await this.getFromActiveBalance(args.wallet, flags)
-
-    const hash = await this.call(StakeStop, `${flags.dry ? 'create' : 'send'}RetireTransaction`, [
-      from_active_balance === null ? flags['fee-wallet'] || args.wallet : null,
-      from_active_balance,
+    const hash = await this.call(StakeStop, `${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [
       args.wallet,
+      flags.recipient || args.wallet,
       args.value,
       flags.fee,
       flags['validity-start'],

@@ -1,8 +1,8 @@
 import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
-export default class ValidatorDrop extends RpcCommand {
-  static description = 'Drop an inactive validator'
+export default class ValidatorDelete extends RpcCommand {
+  static description = 'Delete an inactive validator'
 
   static args = [{
     name: 'wallet',
@@ -19,9 +19,9 @@ export default class ValidatorDrop extends RpcCommand {
   }
 
   async run() {
-    const {args, flags} = this.parse(ValidatorDrop)
+    const {args, flags} = this.parse(ValidatorDelete)
 
-    const hash = await this.call(ValidatorDrop, `${flags.dry ? 'create' : 'send'}DropValidatorTransaction`, [
+    const hash = await this.call(ValidatorDelete, `${flags.dry ? 'create' : 'send'}DeleteValidatorTransaction`, [
       args.wallet,
       flags.recipient || args.wallet,
       flags.fee,

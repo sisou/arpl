@@ -69,21 +69,15 @@ export abstract class RpcCommand extends Command {
       return this.$rpc.call(method, params, flags.timeout)
     }
 
-    protected async getFromActiveBalance(
+    protected async canPayFeeFromStake(
       stakerAddress: string,
       flags: {
         fee: number;
-        'fee-wallet'?: string;
         timeout: number;
       },
-    ): Promise<boolean | null> {
-      if (flags['fee-wallet']) return null
-
+    ): Promise<boolean> {
       const staker = await this.$rpc.call('getStakerByAddress', [stakerAddress], flags.timeout) as Staker
-
-      if (staker.inactiveStake >= flags.fee) return false
-      if (staker.activeStake >= flags.fee) return true
-
+      if (staker.balance > flags.fee) return true
       throw new Error('Cannot pay fee from stake: not enough stake. Use --fee-wallet to specify which account to pay the fee from.')
     }
 }
