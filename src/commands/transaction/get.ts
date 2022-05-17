@@ -14,7 +14,7 @@ export default class TransactionGet extends RpcCommand {
   async run() {
     const {args} = this.parse(TransactionGet)
 
-    const result = await this.call(TransactionGet, 'getTransactionByHash', [args.hash, true])
+    const result = await this.call(TransactionGet, 'getTransactionByHash', [args.hash /* , true */])
 
     console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
   }

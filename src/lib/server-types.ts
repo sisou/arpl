@@ -74,13 +74,15 @@ export type MicroBlock = {
         slotNumber: number;
         validator: Address;
     };
-    seed: string;
+    seed: {
+        signature: number[],
+    };
     stateHash: string;
     timestamp: number;
     view: number;
     forkProofs?: any[];
     justification?: {
-        signature: string;
+        signature: number[];
         viewChangeProof: any | null;
     };
     transactions?: Transaction[];
@@ -97,7 +99,9 @@ export type MacroBlock = {
     isElectionBlock: boolean;
     parentHash: string;
     parentElectionHash: string;
-    seed: string;
+    seed: {
+        signature: number[],
+    };
     stateHash: string;
     timestamp: number;
     view: number;
