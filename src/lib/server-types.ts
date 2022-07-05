@@ -1,7 +1,7 @@
-export const STAKING_CONTRACT_ADDRESS = 'NQ38 STAK 1NG0 0000 0000 C0NT RACT 0000 0000'
+import {Address, Coin} from './types/common'
 
-export type Address = string
-export type Coin = number
+export * from './types/common'
+export * from './types/logs'
 
 export enum AccountType {
     BASIC = 'basic',
@@ -75,7 +75,7 @@ export type MicroBlock = {
         validator: Address;
     };
     seed: {
-        signature: number[],
+        signature: number[];
     };
     stateHash: string;
     timestamp: number;
@@ -100,7 +100,7 @@ export type MacroBlock = {
     parentHash: string;
     parentElectionHash: string;
     seed: {
-        signature: number[],
+        signature: number[];
     };
     stateHash: string;
     timestamp: number;

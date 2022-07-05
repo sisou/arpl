@@ -53,9 +53,7 @@ export abstract class RpcCommand extends Command {
 
     protected $rpc = Rpc.getClient()
 
-    protected parse<F, A extends {
-      [name: string]: any;
-    }>(options: Parser.Input<F>, argv?: string[]): Parser.Output<F, A> {
+    protected parse<F, A extends Record<string, any>>(options: Parser.Input<F>, argv?: string[]): Parser.Output<F, A> {
       const mergedOptions: Parser.Input<any> = {
         ...options,
         args: options.args || RpcCommand.args,

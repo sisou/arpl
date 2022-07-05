@@ -1,3 +1,4 @@
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class TransactionSend extends RpcCommand {
@@ -22,15 +23,20 @@ export default class TransactionSend extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    data: flags.string({
+      description: 'HEX-encoded data',
+    }),
     ...RpcCommand.txFlags,
   }
 
   async run() {
     const {args, flags} = this.parse(TransactionSend)
 
-    const hash = await this.call(TransactionSend, `${flags.dry ? 'create' : 'send'}BasicTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}BasicTransaction${flags.data ? 'WithData' : ''}`
+    const hash = await this.call(TransactionSend, method, [
       args.wallet,
       args.recipient,
+      ...(flags.data ? [flags.data] : []),
       args.value,
       flags.fee,
       flags['validity-start'],
