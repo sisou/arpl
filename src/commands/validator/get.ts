@@ -3,7 +3,7 @@ import {flags} from '@oclif/command'
 // import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
 // import {formatBalance} from '../../lib/formatting'
-import type {Validator} from '../../lib/server-types'
+import type {BlockchainState, Validator} from '../../lib/server-types'
 
 export default class ValidatorGet extends RpcCommand {
   static description = 'Show information for a validator'
@@ -30,7 +30,7 @@ export default class ValidatorGet extends RpcCommand {
     const validator = await this.call(ValidatorGet, 'getValidatorByAddress', [
       args.validator_address,
       flags.stakers,
-    ]) as Validator
+    ]) as BlockchainState<Validator>
 
     // if (flags.plain) {
     console.dir(validator, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console

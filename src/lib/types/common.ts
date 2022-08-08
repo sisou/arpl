@@ -126,11 +126,6 @@ export type MacroBlock = {
 
 export type Block = MicroBlock | MacroBlock
 
-export type Stakes = {
-    address: Address,
-    balance: Coin,
-}[]
-
 export type Staker = {
     address: Address;
     balance: Coin;
@@ -139,12 +134,17 @@ export type Staker = {
 
 export type Validator = {
     address: Address;
-    warmAddress: Address;
-    validatorKey: string;
+    signingKey: string;
+    votingKey: string;
     rewardAddress: Address;
     signalData?: string;
     balance: Coin;
     numStakers: number;
     inactivityFlag?: number;
-    stakers?: Stakes;
+    stakers?: Staker[];
+}
+
+export type BlockchainState<T> = T & {
+    blockNumber: number,
+    blockHash: string,
 }

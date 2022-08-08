@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 // import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
 // import {formatBalance} from '../../lib/formatting'
-import type {Staker} from '../../lib/server-types'
+import type {BlockchainState, Staker} from '../../lib/server-types'
 
 export default class StakeGet extends RpcCommand {
   static description = 'Show information for a staker'
@@ -27,7 +27,7 @@ export default class StakeGet extends RpcCommand {
 
     const staker = await this.call(StakeGet, 'getStakerByAddress', [
       args.staker_address,
-    ]) as Staker
+    ]) as BlockchainState<Staker>
 
     // if (flags.plain) {
     console.dir(staker, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console

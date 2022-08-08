@@ -3,7 +3,7 @@ import {flags} from '@oclif/command'
 // import chalk from 'chalk'
 import {RpcCommand} from '../../lib/rpc-command'
 // import {formatBalance} from '../../lib/formatting'
-import {Stakes} from '../../lib/server-types'
+import {Validator} from '../../lib/server-types'
 
 export default class StakeList extends RpcCommand {
   static description = 'List validators and their stakes'
@@ -18,7 +18,7 @@ export default class StakeList extends RpcCommand {
   async run() {
     // const {flags} = this.parse(StakeList)
 
-    const stakes = await this.call(StakeList, 'getActiveValidators') as Stakes
+    const stakes = await this.call(StakeList, 'getActiveValidators') as Validator[]
 
     // if (flags.plain) {
     console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
