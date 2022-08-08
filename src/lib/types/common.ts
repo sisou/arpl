@@ -126,7 +126,10 @@ export type MacroBlock = {
 
 export type Block = MicroBlock | MacroBlock
 
-export type Stakes = Record<Address, Coin>
+export type Stakes = {
+    address: Address,
+    balance: Coin,
+}[]
 
 export type Staker = {
     address: Address;
