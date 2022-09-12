@@ -19,7 +19,7 @@ export class Socket extends WebsocketClient {
     .call(method, params || [], timeout, ws_opts)
     .then(result => {
       cli.action.stop()
-      return result
+      return (result as any).data
     })
     .catch(error => {
       if (error.data) throw new Error(`${error.message}: ${error.data}`)
@@ -64,7 +64,7 @@ export class Request {
       return response.json()
     })
     .then(data => {
-      if (data.result) return data.result
+      if (data.result) return data.result.data
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
     })
   }

@@ -31,7 +31,7 @@ export default class StakeMove extends RpcCommand {
       pay_fee_from_stake = await this.canPayFeeFromStake(args.wallet, flags)
     }
 
-    const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}UpdateTransaction`, [
+    const hash = await this.call(StakeMove, `${flags.dry ? 'create' : 'send'}UpdateStakerTransaction`, [
       pay_fee_from_stake ? null : flags['fee-wallet'],
       args.wallet,
       args.new_validator_address,
