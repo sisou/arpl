@@ -16,9 +16,9 @@ export default class StakeList extends RpcCommand {
   }
 
   async run() {
-    // const {flags} = this.parse(StakeList)
+    const {flags} = this.parse(StakeList)
 
-    const stakes = await this.call(StakeList, 'getActiveValidators') as Validator[]
+    const {data: stakes, metadata} = await this.call<Validator[]>(StakeList, 'getActiveValidators')
 
     // if (flags.plain) {
     console.dir(stakes, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
@@ -64,5 +64,7 @@ export default class StakeList extends RpcCommand {
     //   this.log(`${stake.staker_address} | ${formatBalance(stake.balance)}`)
     // }
     // if (stakes.inactiveStakes.length === 0) this.log('-none-')
+
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

@@ -37,8 +37,9 @@ export default class BlockGet extends RpcCommand {
       ]
     }
 
-    const result = await this.call(BlockGet, method, params)
+    const {data: block, metadata} = await this.call(BlockGet, method, params)
 
-    console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    console.dir(block, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

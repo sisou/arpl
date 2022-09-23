@@ -16,14 +16,15 @@ export default class AccountGet extends RpcCommand {
   }
 
   async run() {
-    const {args} = this.parse(AccountGet)
+    const {args, flags} = this.parse(AccountGet)
 
-    const account = await this.call(AccountGet, 'getAccountByAddress', [args.address]) as Account
+    const {data: account, metadata} = await this.call<Account>(AccountGet, 'getAccountByAddress', [args.address])
 
     this.log(`Type: ${account.type}`)
     this.log(`Balance: ${formatBalance(account.balance)}`)
     if (account.type !== 'basic') {
       console.dir(account, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
     }
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

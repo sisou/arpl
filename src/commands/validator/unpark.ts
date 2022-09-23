@@ -25,7 +25,8 @@ export default class ValidatorUnpark extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorUnpark)
 
-    const hash = await this.call(ValidatorUnpark, `${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}UnparkValidatorTransaction`
+    const {data: hash, metadata} = await this.call(ValidatorUnpark, method, [
       args.wallet,
       args.validator_address,
       args.signing_secret_key,
@@ -34,5 +35,6 @@ export default class ValidatorUnpark extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

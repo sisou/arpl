@@ -21,8 +21,13 @@ export default class AccountUnlock extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(AccountUnlock)
 
-    await this.call(AccountUnlock, 'unlockAccount', [args.address, flags.password || null, /* duration */ null])
+    const {metadata} = await this.call(
+      AccountUnlock,
+      'unlockAccount',
+      [args.address, flags.password || null, /* duration */ null],
+    )
 
     this.log(`Account unlocked: ${args.address}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

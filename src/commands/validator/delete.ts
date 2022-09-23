@@ -21,7 +21,8 @@ export default class ValidatorDelete extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorDelete)
 
-    const hash = await this.call(ValidatorDelete, `${flags.dry ? 'create' : 'send'}DeleteValidatorTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}DeleteValidatorTransaction`
+    const {data: hash, metadata} = await this.call(ValidatorDelete, method, [
       args.wallet,
       flags.recipient || args.wallet,
       flags.fee,
@@ -29,5 +30,6 @@ export default class ValidatorDelete extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

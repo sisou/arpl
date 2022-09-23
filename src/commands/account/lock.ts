@@ -14,10 +14,11 @@ export default class AccountLock extends RpcCommand {
   }
 
   async run() {
-    const {args} = this.parse(AccountLock)
+    const {args, flags} = this.parse(AccountLock)
 
-    await this.call(AccountLock, 'lockAccount', [args.address])
+    const {metadata} = await this.call(AccountLock, 'lockAccount', [args.address])
 
     this.log(`Account locked: ${args.address}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

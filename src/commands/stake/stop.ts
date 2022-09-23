@@ -29,7 +29,8 @@ export default class StakeStop extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(StakeStop)
 
-    const hash = await this.call(StakeStop, `${flags.dry ? 'create' : 'send'}UnstakeTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}UnstakeTransaction`
+    const {data: hash, metadata} = await this.call(StakeStop, method, [
       args.wallet,
       flags.recipient || args.wallet,
       args.value,
@@ -38,5 +39,6 @@ export default class StakeStop extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

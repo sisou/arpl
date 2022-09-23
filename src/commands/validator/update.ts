@@ -34,7 +34,8 @@ export default class ValidatorUpdate extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorUpdate)
 
-    const hash = await this.call(ValidatorUpdate, `${flags.dry ? 'create' : 'send'}UpdateValidatorTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}UpdateValidatorTransaction`
+    const {data: hash, metadata} = await this.call(ValidatorUpdate, method, [
       args.wallet,
       args.validator_address,
       flags['signing-secret-key'] || null,
@@ -46,5 +47,6 @@ export default class ValidatorUpdate extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

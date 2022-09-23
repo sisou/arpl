@@ -10,8 +10,14 @@ type WebsocketOptions = {
   fin?: boolean;
 }
 
+export type RpcResponse<R> = {
+  data: R;
+  metadata?: Record<string, unknown>;
+}
+
 export class Socket extends WebsocketClient {
-  public async call(method: string, params?: IWSRequestParams, timeout?: number, ws_opts?: WebsocketOptions): Promise<unknown> {
+  public async call(method: string, params?: IWSRequestParams, timeout?: number, ws_opts?: WebsocketOptions):
+    Promise<RpcResponse<unknown>> {
     // Show loading spinner if no result after 1s
     const loaderTimeout = setTimeout(() => cli.action.start('Loading'), 1000)
 
@@ -19,7 +25,7 @@ export class Socket extends WebsocketClient {
     .call(method, params || [], timeout, ws_opts)
     .then(result => {
       cli.action.stop()
-      return (result as any).data
+      return result as RpcResponse<unknown>
     })
     .catch(error => {
       if (error.data) throw new Error(`${error.message}: ${error.data}`)
@@ -39,7 +45,7 @@ export class Request {
     private auth?: string,
   ) {}
 
-  public async call(method: string, params?: IWSRequestParams | undefined, _timeout?: number): Promise<unknown> {
+  public async call(method: string, params?: IWSRequestParams, _timeout?: number): Promise<RpcResponse<unknown>> {
     return fetch(this.url, {
       method: 'POST',
       headers: {
@@ -64,7 +70,7 @@ export class Request {
       return response.json()
     })
     .then(data => {
-      if (data.result) return data.result.data
+      if (data.result) return data.result
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
     })
   }

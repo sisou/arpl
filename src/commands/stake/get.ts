@@ -23,15 +23,18 @@ export default class StakeGet extends RpcCommand {
   }
 
   async run() {
-    const {args} = this.parse(StakeGet)
+    const {args, flags} = this.parse(StakeGet)
 
-    const staker = await this.call(StakeGet, 'getStakerByAddress', [
-      args.staker_address,
-    ]) as BlockchainState<Staker>
+    const {data: staker, metadata} = await this.call<BlockchainState<Staker>>(
+      StakeGet,
+      'getStakerByAddress',
+      [args.staker_address],
+    )
 
     // if (flags.plain) {
     console.dir(staker, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
     //   return
     // }
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

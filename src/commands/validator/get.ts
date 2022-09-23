@@ -27,14 +27,16 @@ export default class ValidatorGet extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorGet)
 
-    const validator = await this.call(ValidatorGet, 'getValidatorByAddress', [
-      args.validator_address,
-      flags.stakers,
-    ]) as BlockchainState<Validator>
+    const {data: validator, metadata} = await this.call<BlockchainState<Validator>>(
+      ValidatorGet,
+      'getValidatorByAddress',
+      [args.validator_address, flags.stakers],
+    )
 
     // if (flags.plain) {
     console.dir(validator, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
     //   return
     // }
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

@@ -33,7 +33,7 @@ export default class TransactionSend extends RpcCommand {
     const {args, flags} = this.parse(TransactionSend)
 
     const method = `${flags.dry ? 'create' : 'send'}BasicTransaction${flags.data ? 'WithData' : ''}`
-    const hash = await this.call(TransactionSend, method, [
+    const {data: hash, metadata} = await this.call(TransactionSend, method, [
       args.wallet,
       args.recipient,
       ...(flags.data ? [flags.data] : []),
@@ -43,5 +43,6 @@ export default class TransactionSend extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }
