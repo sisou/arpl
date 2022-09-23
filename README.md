@@ -40,7 +40,8 @@ USAGE
 
 # Request Options
 ```sh-session
-  -t, --timeout  Timeout for request in ms, set to 0 to disable (default: 5000)
+  -t, --timeout        Timeout for request in ms, set to 0 to disable (default: 5000)
+  -m, --show-metadata  Show response metadata (default: false)
 ```
 
 # Commands
@@ -85,7 +86,6 @@ USAGE
   $ arpl account:create
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
   --password=password  Password to encrypt the key
   --unlock             Unlock the account after creation
 ```
@@ -102,9 +102,6 @@ USAGE
 
 ARGUMENTS
   ADDRESS  Address of the account to follow
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/account/follow.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/account/follow.ts)_
@@ -119,9 +116,6 @@ USAGE
 
 ARGUMENTS
   ADDRESS  Address of the account to display
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/account/get.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/account/get.ts)_
@@ -138,7 +132,6 @@ ARGUMENTS
   PRIVATEKEY  Private key in HEX or Base64 format
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
   --password=password  Password to encrypt the key
   --unlock             Unlock the account after import
 ```
@@ -152,9 +145,6 @@ List accounts available in node
 ```
 USAGE
   $ arpl account:list
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/account/list.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/account/list.ts)_
@@ -169,9 +159,6 @@ USAGE
 
 ARGUMENTS
   ADDRESS  Address of the account to lock
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/account/lock.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/account/lock.ts)_
@@ -188,7 +175,6 @@ ARGUMENTS
   ADDRESS  Address to display transactions for
 
 OPTIONS
-  -m, --show-metadata     Show returned metadata
   -x, --extended          show extra columns
   --columns=columns       only show provided columns (comma-separated)
   --csv                   output is csv format [alias: --output=csv]
@@ -217,7 +203,6 @@ ARGUMENTS
   ADDRESS  Address of the account to unlock
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
   --password=password  Password to decrypt the key
 ```
 
@@ -230,9 +215,6 @@ Stream blocks live
 ```
 USAGE
   $ arpl block:follow
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/block/follow.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/block/follow.ts)_
@@ -249,8 +231,7 @@ ARGUMENTS
   NUMBER_OR_HASH  [default: latest] Block number or hash of the block to get
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
-  --full               Include block body (transactions, etc.)
+  --full  Include block body (transactions, etc.)
 ```
 
 _See code: [src/commands/block/get.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/block/get.ts)_
@@ -279,9 +260,6 @@ Get the local peer ID of the node
 ```
 USAGE
   $ arpl peer:id
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/peer/id.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/peer/id.ts)_
@@ -293,9 +271,6 @@ Run a raw Nimiq JSON-RPC command
 ```
 USAGE
   $ arpl raw COMMAND [OPTIONS]
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/raw.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/raw.ts)_
@@ -327,7 +302,6 @@ ARGUMENTS
   VALUE   NIM amount to add
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --address=address                Staker address to add stake to (default: sender address)
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
@@ -351,8 +325,7 @@ ARGUMENTS
   STAKER_ADDRESS  Address of staker to show information for
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
-  --plain              Display plain command output
+  --plain  Display plain command output
 
 ALIASES
   $ arpl staker:get
@@ -369,8 +342,7 @@ USAGE
   $ arpl stake:list
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
-  --plain              Display plain command output
+  --plain  Display plain command output
 ```
 
 _See code: [src/commands/stake/list.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/stake/list.ts)_
@@ -388,7 +360,6 @@ ARGUMENTS
   NEW_VALIDATOR_ADDRESS  Address of the validator to move stake to
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --fee-wallet=fee-wallet          Address of unlocked account to pay the fee from (default: fee is paid from stake)
@@ -414,7 +385,6 @@ ARGUMENTS
   VALUE              NIM amount to stake
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --staker-wallet=staker-wallet    Address of unlocked staker account (default: WALLET)
@@ -439,7 +409,6 @@ ARGUMENTS
   VALUE   NIM amount to unstake
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --recipient=recipient            Address to receive stake (default: WALLET)
@@ -458,9 +427,6 @@ Show the current status of the node
 ```
 USAGE
   $ arpl status
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 ```
 
 _See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/status.ts)_
@@ -475,9 +441,6 @@ USAGE
 
 ARGUMENTS
   HASH  Transaction hash of the transaction to get
-
-OPTIONS
-  -m, --show-metadata  Show returned metadata
 
 ALIASES
   $ arpl tx:get
@@ -499,7 +462,6 @@ ARGUMENTS
   VALUE      NIM amount to send
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --data=data                      HEX-encoded data
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
@@ -523,7 +485,6 @@ ARGUMENTS
   WALLET  Address of unlocked account that owns the validator
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --recipient=recipient            Address to receive validator deposit (default: sender address)
@@ -544,9 +505,8 @@ ARGUMENTS
   VALIDATOR_ADDRESS  Address of validator to show information for
 
 OPTIONS
-  -m, --show-metadata  Show returned metadata
-  --plain              Display plain command output
-  --stakers            Include a list of the validator's stakers
+  --plain    Display plain command output
+  --stakers  Include a list of the validator's stakers
 ```
 
 _See code: [src/commands/validator/get.ts](https://github.com/sisou/arpl/blob/v0.8.2/src/commands/validator/get.ts)_
@@ -565,7 +525,6 @@ ARGUMENTS
   SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
@@ -591,7 +550,6 @@ ARGUMENTS
   VOTING_SECRET_KEY   BLS secret key used when signing votes (for Macro blocks and view changes)
 
 OPTIONS
-  -m, --show-metadata                    Show returned metadata
   --dry                                  Return serialized transaction without sending it
   --fee=fee                              Fee in Luna (default: 0)
   --reward-address=reward-address        Reward address for the validator (default: sending address)
@@ -619,7 +577,6 @@ ARGUMENTS
   SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
@@ -641,7 +598,6 @@ ARGUMENTS
   SIGNING_SECRET_KEY  Secret key used to sign the unpark transaction
 
 OPTIONS
-  -m, --show-metadata              Show returned metadata
   --dry                            Return serialized transaction without sending it
   --fee=fee                        Fee in Luna (default: 0)
   --validity-start=validity-start  [default: +0] Validity start height of the transaction
@@ -662,7 +618,6 @@ ARGUMENTS
   VALIDATOR_ADDRESS  Address of unlocked account that owns the validator
 
 OPTIONS
-  -m, --show-metadata                      Show returned metadata
   --dry                                    Return serialized transaction without sending it
   --fee=fee                                Fee in Luna (default: 0)
   --reward-address=reward-address          New reward address for the validator (default: no change)

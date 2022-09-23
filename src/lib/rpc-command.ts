@@ -33,6 +33,7 @@ export abstract class RpcCommand extends Command {
         char: 'm',
         description: 'Show returned metadata',
         default: false,
+        hidden: true,
       }),
     }
 
