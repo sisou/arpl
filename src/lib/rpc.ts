@@ -35,6 +35,23 @@ export class Socket extends WebsocketClient {
       clearTimeout(loaderTimeout)
     })
   }
+
+  public onSubscription<R>(
+    event: string,
+    subscriptionId: number,
+    listener: (message: RpcResponse<R>) => void,
+    context?: any,
+  ): this {
+    return super.on(event, (message: unknown) => {
+      if (typeof message !== 'object' || !message || typeof (message as any).subscription !== 'number' ||
+        !('result' in message)) {
+        throw new Error(`Unexpected format of subscription message ${JSON.stringify(message)}`)
+      }
+      const {result, subscription} = message as {result: RpcResponse<R>; subscription: number}
+      if (subscription !== subscriptionId) return
+      listener(result)
+    }, context)
+  }
 }
 
 export class Request {
@@ -72,6 +89,7 @@ export class Request {
     .then(data => {
       if (data.result) return data.result
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
+      throw new Error(`Unexpected format of data ${JSON.stringify(data)}`)
     })
   }
 }

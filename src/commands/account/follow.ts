@@ -24,10 +24,13 @@ export default class AccountFollow extends RpcCommand {
     this.log('Subscribed to account events')
     this.showMetadataIfRequested(metadata, flags);
 
-    (this.$rpc as Socket).on('subscribeForLogsByAddressesAndTypes', async ({result: blockLog, subscription}: { result: AppliedBlockLog | RevertedBlockLog; subscription: number }) => {
-      if (subscription !== subscriptionId) return
-
-      console.dir(blockLog, {depth: Infinity}) // eslint-disable-line no-console
-    })
+    (this.$rpc as Socket).onSubscription<AppliedBlockLog | RevertedBlockLog>(
+      'subscribeForLogsByAddressesAndTypes',
+      subscriptionId,
+      ({data: blockLog, metadata}) => {
+        console.dir(blockLog, {depth: Infinity}) // eslint-disable-line no-console
+        this.showMetadataIfRequested(metadata, flags, 'Account subscription')
+      },
+    )
   }
 }
