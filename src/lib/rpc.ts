@@ -12,7 +12,16 @@ type WebsocketOptions = {
 
 export type RpcResponse<R> = {
   data: R;
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | null;
+}
+
+function asRpcResponse<R>(response: RpcResponse<R> | R): RpcResponse<R> {
+  if (response && typeof response === 'object' && 'data' in response && 'metadata' in response) return response
+  // convert legacy responses of old albatross clients before nimiq/core-rs-albatross#1023 into the new response format
+  return {
+    data: response as R,
+    metadata: null,
+  }
 }
 
 export class Socket extends WebsocketClient {
@@ -25,7 +34,7 @@ export class Socket extends WebsocketClient {
     .call(method, params || [], timeout, ws_opts)
     .then(result => {
       cli.action.stop()
-      return result as RpcResponse<unknown>
+      return asRpcResponse(result)
     })
     .catch(error => {
       if (error.data) throw new Error(`${error.message}: ${error.data}`)
@@ -47,9 +56,9 @@ export class Socket extends WebsocketClient {
         !('result' in message)) {
         throw new Error(`Unexpected format of subscription message ${JSON.stringify(message)}`)
       }
-      const {result, subscription} = message as {result: RpcResponse<R>; subscription: number}
+      const {result, subscription} = message as {result: RpcResponse<R> | R; subscription: number}
       if (subscription !== subscriptionId) return
-      listener(result)
+      listener(asRpcResponse(result))
     }, context)
   }
 }
@@ -87,7 +96,7 @@ export class Request {
       return response.json()
     })
     .then(data => {
-      if (data.result) return data.result
+      if (data.result) return asRpcResponse(data.result)
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
       throw new Error(`Unexpected format of data ${JSON.stringify(data)}`)
     })
