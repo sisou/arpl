@@ -29,7 +29,7 @@ export abstract class RpcCommand extends Command {
         char: 'a',
         hidden: true,
       }),
-      'show-metadata': flags.boolean({
+      metadata: flags.boolean({
         char: 'm',
         description: 'Show returned metadata',
         default: false,
@@ -74,7 +74,7 @@ export abstract class RpcCommand extends Command {
     }
 
     protected showMetadataIfRequested(metadata: any, flags: Parser.flags.Output, description?: string) {
-      if (!flags['show-metadata']) return
+      if (!flags.metadata) return
       this.log(chalk.dim(`${description ? `${description} r` : 'R'}esponse metadata: %O`), metadata)
     }
 

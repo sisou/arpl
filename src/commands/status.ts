@@ -19,7 +19,7 @@ export default class Status extends RpcCommand {
       // TODO: Get validator status
     ])
 
-    const showMetadata = flags['show-metadata']
+    const showMetadata = flags.metadata
     const metadataTemplate = showMetadata ? chalk.dim(' - Metadata: %O') : ''
     this.log(
       `Consensus: %s${metadataTemplate}`,
