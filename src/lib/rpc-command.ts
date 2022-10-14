@@ -1,9 +1,9 @@
 import {Command, flags} from '@oclif/command'
 import chalk from 'chalk'
-import Rpc, {RpcResponse} from './rpc'
+import Rpc from './rpc'
 import type * as Parser from '@oclif/parser'
 import type {IWSRequestParams} from 'rpc-websockets/dist/lib/client'
-import {Staker} from './server-types'
+import type {Staker, RpcResponse} from './server-types'
 
 export abstract class RpcCommand extends Command {
     static flags = {

@@ -2,17 +2,13 @@ import {Client as WebsocketClient} from 'rpc-websockets'
 import fetch from 'node-fetch'
 import cli from 'cli-ux'
 import type {IWSRequestParams} from 'rpc-websockets/dist/lib/client'
+import type { RpcResponse } from './server-types'
 
 type WebsocketOptions = {
   mask?: boolean;
   binary?: boolean;
   compress?: boolean;
   fin?: boolean;
-}
-
-export type RpcResponse<R> = {
-  data: R;
-  metadata?: Record<string, unknown> | null;
 }
 
 function asRpcResponse<R>(response: RpcResponse<R> | R): RpcResponse<R> {

@@ -3,6 +3,11 @@ export type Coin = number
 
 export const STAKING_CONTRACT_ADDRESS = 'NQ38 STAK 1NG0 0000 0000 C0NT RACT 0000 0000'
 
+export type RpcResponse<R> = {
+    data: R;
+    metadata?: Record<string, unknown> | null;
+}
+
 export enum AccountType {
     BASIC = 'basic',
     VESTING = 'vesting',
