@@ -145,6 +145,6 @@ export type Validator = {
 }
 
 export type BlockchainState<T> = T & {
-    blockNumber: number,
-    blockHash: string,
+    blockNumber: number;
+    blockHash: string;
 }

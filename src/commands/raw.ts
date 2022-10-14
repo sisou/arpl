@@ -14,6 +14,8 @@ export default class Raw extends RpcCommand {
   static strict = false
 
   async run() {
+    const {flags} = this.parse(Raw)
+
     const [id, ...argv] = this.argv.filter((arg, i, arr) => {
       const isFlag = arg.startsWith('-')
       const isFlagArgument = i > 0 ? arr[i - 1].startsWith('-') && !arr[i - 1].includes('=') : false
@@ -39,8 +41,9 @@ export default class Raw extends RpcCommand {
       return arg
     })
 
-    const result = await this.call(Raw, id, params)
+    const {data, metadata} = await this.call<unknown>(Raw, id, params)
 
-    console.dir(result, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    console.dir(data, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

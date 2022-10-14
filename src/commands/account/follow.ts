@@ -13,15 +13,24 @@ export default class AccountFollow extends RpcCommand {
   }]
 
   async run() {
-    const {args} = this.parse(AccountFollow)
+    const {args, flags} = this.parse(AccountFollow)
 
-    const subscriptionId = await this.call(AccountFollow, 'subscribeForLogsByAddressesAndTypes', [[args.address], []]) as number // Throws when not in REPL
-    this.log('Subscribed to account events');
+    // Throws when not in REPL
+    const {data: subscriptionId, metadata} = await this.call<number>(
+      AccountFollow,
+      'subscribeForLogsByAddressesAndTypes',
+      [[args.address], []],
+    )
+    this.log('Subscribed to account events')
+    this.showMetadataIfRequested(metadata, flags);
 
-    (this.$rpc as Socket).on('subscribeForLogsByAddressesAndTypes', async ({result: blockLog, subscription}: { result: AppliedBlockLog | RevertedBlockLog; subscription: number }) => {
-      if (subscription !== subscriptionId) return
-
-      console.dir(blockLog, {depth: Infinity}) // eslint-disable-line no-console
-    })
+    (this.$rpc as Socket).onSubscription<AppliedBlockLog | RevertedBlockLog>(
+      'subscribeForLogsByAddressesAndTypes',
+      subscriptionId,
+      ({data: blockLog, metadata}) => {
+        console.dir(blockLog, {depth: Infinity}) // eslint-disable-line no-console
+        this.showMetadataIfRequested(metadata, flags, 'Account subscription')
+      },
+    )
   }
 }

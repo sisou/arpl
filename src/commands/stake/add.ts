@@ -28,7 +28,8 @@ export default class StakeAdd extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(StakeAdd)
 
-    const hash = await this.call(StakeAdd, `${flags.dry ? 'create' : 'send'}StakeTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}StakeTransaction`
+    const {data: hash, metadata} = await this.call(StakeAdd, method, [
       args.wallet,
       flags.address || args.wallet,
       args.value,
@@ -37,5 +38,6 @@ export default class StakeAdd extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

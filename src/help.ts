@@ -18,6 +18,7 @@ export default class MyHelpClass extends Help {
     })
     const requestOptions = renderList([
       ['-t, --timeout', 'Timeout for request in ms, set to 0 to disable (default: 5000)'],
+      ['-m, --metadata', 'Show response metadata (default: false)'],
     ], {
       stripAnsi: this.opts.stripAnsi,
       maxWidth: this.opts.maxWidth - 2,

@@ -1,5 +1,6 @@
 import {Command, flags} from '@oclif/command'
-import Rpc from './rpc'
+import chalk from 'chalk'
+import Rpc, {RpcResponse} from './rpc'
 import type * as Parser from '@oclif/parser'
 import type {IWSRequestParams} from 'rpc-websockets/dist/lib/client'
 import {Staker} from './server-types'
@@ -26,6 +27,12 @@ export abstract class RpcCommand extends Command {
       }),
       auth: flags.string({
         char: 'a',
+        hidden: true,
+      }),
+      metadata: flags.boolean({
+        char: 'm',
+        description: 'Show returned metadata',
+        default: false,
         hidden: true,
       }),
     }
@@ -56,15 +63,19 @@ export abstract class RpcCommand extends Command {
     protected parse<F, A extends Record<string, any>>(options: Parser.Input<F>, argv?: string[]): Parser.Output<F, A> {
       const mergedOptions: Parser.Input<any> = {
         ...options,
-        args: options.args || RpcCommand.args,
         flags: options.flags || RpcCommand.flags || {},
       }
       return super.parse(mergedOptions, argv)
     }
 
-    protected call(command: typeof Command, method: string, params?: IWSRequestParams) {
+    protected call<R>(command: typeof Command, method: string, params?: IWSRequestParams): Promise<RpcResponse<R>> {
       const {flags} = this.parse(command)
-      return this.$rpc.call(method, params, flags.timeout)
+      return this.$rpc.call(method, params, flags.timeout) as Promise<RpcResponse<R>>
+    }
+
+    protected showMetadataIfRequested(metadata: any, flags: Parser.flags.Output, description?: string) {
+      if (!flags.metadata) return
+      this.log(chalk.dim(`${description ? `${description} r` : 'R'}esponse metadata: %O`), metadata)
     }
 
     protected async canPayFeeFromStake(
@@ -74,7 +85,7 @@ export abstract class RpcCommand extends Command {
         timeout: number;
       },
     ): Promise<boolean> {
-      const staker = await this.$rpc.call('getStakerByAddress', [stakerAddress], flags.timeout) as Staker
+      const staker = (await this.$rpc.call('getStakerByAddress', [stakerAddress], flags.timeout)).data as Staker
       if (staker.balance > flags.fee) return true
       throw new Error('Cannot pay fee from stake: not enough stake. Use --fee-wallet to specify which account to pay the fee from.')
     }

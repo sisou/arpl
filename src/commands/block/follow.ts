@@ -7,12 +7,14 @@ export default class BlockFollow extends RpcCommand {
   static description = 'Stream blocks live'
 
   async run() {
-    const subscriptionId = await this.call(BlockFollow, 'subscribeForHeadBlock', [true]) as number // Throws when not in REPL
-    this.log('Subscribed to blocks');
+    const {flags} = this.parse(BlockFollow)
 
-    (this.$rpc as Socket).on('subscribeForHeadBlock', async ({result: block, subscription}: {result: Block; subscription: number}) => {
-      if (subscription !== subscriptionId) return
+    // Throws when not in REPL
+    const {data: subscriptionId, metadata} = await this.call<number>(BlockFollow, 'subscribeForHeadBlock', [true])
+    this.log('Subscribed to blocks')
+    this.showMetadataIfRequested(metadata, flags);
 
+    (this.$rpc as Socket).onSubscription<Block>('subscribeForHeadBlock', subscriptionId, ({data: block, metadata}) => {
       const batchesPerEpoch = Math.ceil(block.batch / block.epoch)
 
       this.log([
@@ -28,6 +30,8 @@ export default class BlockFollow extends RpcCommand {
             `election (epoch ${block.epoch} => ${block.epoch + 1})` :
             `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})`,
       ].join(' ｜'))
+
+      this.showMetadataIfRequested(metadata, flags, 'Block subscription')
     })
   }
 }

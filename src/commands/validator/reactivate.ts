@@ -25,7 +25,8 @@ export default class ValidatorReactivate extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(ValidatorReactivate)
 
-    const hash = await this.call(ValidatorReactivate, `${flags.dry ? 'create' : 'send'}ReactivateValidatorTransaction`, [
+    const method = `${flags.dry ? 'create' : 'send'}ReactivateValidatorTransaction`
+    const {data: hash, metadata} = await this.call(ValidatorReactivate, method, [
       args.wallet,
       args.validator_address,
       args.signing_secret_key,
@@ -34,5 +35,6 @@ export default class ValidatorReactivate extends RpcCommand {
     ])
 
     this.log(`Transaction ${flags.dry ? 'prepared' : 'sent'}: ${hash}`)
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

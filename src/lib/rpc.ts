@@ -10,8 +10,23 @@ type WebsocketOptions = {
   fin?: boolean;
 }
 
+export type RpcResponse<R> = {
+  data: R;
+  metadata?: Record<string, unknown> | null;
+}
+
+function asRpcResponse<R>(response: RpcResponse<R> | R): RpcResponse<R> {
+  if (response && typeof response === 'object' && 'data' in response && 'metadata' in response) return response
+  // convert legacy responses of old albatross clients before nimiq/core-rs-albatross#1023 into the new response format
+  return {
+    data: response as R,
+    metadata: null,
+  }
+}
+
 export class Socket extends WebsocketClient {
-  public async call(method: string, params?: IWSRequestParams, timeout?: number, ws_opts?: WebsocketOptions): Promise<unknown> {
+  public async call(method: string, params?: IWSRequestParams, timeout?: number, ws_opts?: WebsocketOptions):
+    Promise<RpcResponse<unknown>> {
     // Show loading spinner if no result after 1s
     const loaderTimeout = setTimeout(() => cli.action.start('Loading'), 1000)
 
@@ -19,7 +34,7 @@ export class Socket extends WebsocketClient {
     .call(method, params || [], timeout, ws_opts)
     .then(result => {
       cli.action.stop()
-      return result
+      return asRpcResponse(result)
     })
     .catch(error => {
       if (error.data) throw new Error(`${error.message}: ${error.data}`)
@@ -28,6 +43,23 @@ export class Socket extends WebsocketClient {
     .finally(() => {
       clearTimeout(loaderTimeout)
     })
+  }
+
+  public onSubscription<R>(
+    event: string,
+    subscriptionId: number,
+    listener: (message: RpcResponse<R>) => void,
+    context?: any,
+  ): this {
+    return super.on(event, (message: unknown) => {
+      if (typeof message !== 'object' || !message || typeof (message as any).subscription !== 'number' ||
+        !('result' in message)) {
+        throw new Error(`Unexpected format of subscription message ${JSON.stringify(message)}`)
+      }
+      const {result, subscription} = message as {result: RpcResponse<R> | R; subscription: number}
+      if (subscription !== subscriptionId) return
+      listener(asRpcResponse(result))
+    }, context)
   }
 }
 
@@ -39,7 +71,7 @@ export class Request {
     private auth?: string,
   ) {}
 
-  public async call(method: string, params?: IWSRequestParams | undefined, _timeout?: number): Promise<unknown> {
+  public async call(method: string, params?: IWSRequestParams, _timeout?: number): Promise<RpcResponse<unknown>> {
     return fetch(this.url, {
       method: 'POST',
       headers: {
@@ -64,8 +96,9 @@ export class Request {
       return response.json()
     })
     .then(data => {
-      if (data.result) return data.result
+      if (data.result) return asRpcResponse(data.result)
       if (data.error) throw new Error(`${data.error.message}: ${data.error.data}`)
+      throw new Error(`Unexpected format of data ${JSON.stringify(data)}`)
     })
   }
 }

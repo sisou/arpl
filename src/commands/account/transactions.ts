@@ -30,9 +30,13 @@ export default class AccountTransactions extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(AccountTransactions)
 
-    const result = await this.call(AccountTransactions, 'getTransactionsByAddress', [args.address, flags.max || null]) as Transaction[]
+    const {data: transactions, metadata} = await this.call<Transaction[]>(
+      AccountTransactions,
+      'getTransactionsByAddress',
+      [args.address, flags.max || null],
+    )
 
-    cli.table(result, {
+    cli.table(transactions, {
       blockNumber: {
         header: 'Block',
         extended: true,
@@ -69,5 +73,7 @@ export default class AccountTransactions extends RpcCommand {
         // TODO: Try to decode data into UTF8 message
       },
     }, {...flags})
+
+    this.showMetadataIfRequested(metadata, flags)
   }
 }

@@ -24,13 +24,26 @@ export default class AccountImport extends RpcCommand {
   async run() {
     const {args, flags} = this.parse(AccountImport)
 
-    const address = await this.call(AccountImport, 'importRawKey', [args.privatekey, flags.password || null])
+    const {data: address, metadata: importMetadata} = await this.call(
+      AccountImport,
+      'importRawKey',
+      [args.privatekey, flags.password || null],
+    )
 
+    let unlockMetadata
     if (flags.unlock) {
-      this.log('Key imported, unlocking...')
-      await this.call(AccountImport, 'unlockAccount', [address, flags.password || null, /* duration */ null])
+      this.log('Key imported, unlocking...');
+      ({metadata: unlockMetadata} = await this.call(
+        AccountImport,
+        'unlockAccount',
+        [address, flags.password || null, /* duration */ null],
+      ))
     }
 
     this.log(`Account imported: ${address} (${flags.unlock ? 'unlocked' : 'locked'})`)
+    this.showMetadataIfRequested(importMetadata, flags, flags.unlock ? 'Import' : undefined)
+    if (flags.unlock) {
+      this.showMetadataIfRequested(unlockMetadata, flags, 'Unlock')
+    }
   }
 }

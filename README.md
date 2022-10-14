@@ -40,7 +40,8 @@ USAGE
 
 # Request Options
 ```sh-session
-  -t, --timeout  Timeout for request in ms, set to 0 to disable (default: 5000)
+  -t, --timeout   Timeout for request in ms, set to 0 to disable (default: 5000)
+  -m, --metadata  Show response metadata (default: false)
 ```
 
 # Commands
