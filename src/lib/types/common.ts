@@ -58,6 +58,7 @@ export type Transaction = {
     to: Address;
     validityStartHeight: number;
     value: Coin;
+    executionResult: boolean;
 }
 
 export enum BlockType {
