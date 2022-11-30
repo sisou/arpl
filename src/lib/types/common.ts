@@ -8,6 +8,20 @@ export type RpcResponse<R> = {
     metadata?: Record<string, unknown> | null;
 }
 
+export type PolicyConstants = {
+    stakingContractAddress: string,
+    coinbaseAddress: string,
+    transactionValidityWindow: number,
+    maxSizeMicroBody: number,
+    version: number,
+    slots: number,
+    blocksPerBatch: number,
+    batchesPerEpoch: number,
+    blocksPerEpoch: number,
+    validatorDeposit: number,
+    totalSupply: number,
+}
+
 export enum AccountType {
     BASIC = 'basic',
     VESTING = 'vesting',
@@ -46,18 +60,18 @@ export type HtlcAccount = {
 export type Account = BasicAccount | VestingAccount | HtlcAccount
 
 export type Transaction = {
-    blockNumber: number;
-    confirmations: number;
-    data: string;
-    fee: Coin;
-    flags: number;
-    from: Address;
     hash: string;
-    proof: string;
+    blockNumber: number;
     timestamp: number;
+    confirmations: number;
+    from: Address;
     to: Address;
-    validityStartHeight: number;
     value: Coin;
+    fee: Coin;
+    data: string;
+    flags: number;
+    validityStartHeight: number;
+    proof: string;
     executionResult: boolean;
 }
 
@@ -67,52 +81,63 @@ export enum BlockType {
 }
 
 export type MicroBlock = {
-    batch: number;
-    number: number;
     type: BlockType.MICRO;
-    bodyHash: string;
-    epoch: number;
-    extraData: string;
     hash: string;
+    size: number;
+    batch: number;
+    epoch: number;
+    version: number;
+    number: number;
+    timestamp: number;
     parentHash: string;
-    producer: {
-        publicKey: string;
-        slotNumber: number;
-        validator: Address;
-    };
     seed: {
         signature: number[];
     };
+    extraData: string;
     stateHash: string;
-    timestamp: number;
-    view: number;
+    bodyHash: string;
+    historyHash: string;
+    transactions?: Transaction[];
+    producer: {
+        slotNumber: number;
+        validator: Address;
+        publicKey: string;
+    };
     forkProofs?: any[];
     justification?: {
-        signature: number[];
-        viewChangeProof: any | null;
+        micro: string;
+    } | {
+        skip: {
+            sig: {
+                signature: string;
+                signers: number[];
+            };
+        };
     };
-    transactions?: Transaction[];
 }
 
 export type MacroBlock = {
-    batch: number;
-    number: number;
     type: BlockType.MACRO;
-    bodyHash: string;
-    epoch: number;
-    extraData: string;
     hash: string;
-    isElectionBlock: boolean;
+    size: number;
+    batch: number;
+    epoch: number;
+    version: number;
+    number: number;
+    timestamp: number;
     parentHash: string;
-    parentElectionHash: string;
     seed: {
         signature: number[];
     };
+    extraData: string;
     stateHash: string;
-    timestamp: number;
-    view: number;
-    lostRewardSet?: [];
-    disabledSet?: [];
+    bodyHash: string;
+    historyHash: string;
+    transactions?: Transaction[];
+    isElectionBlock: boolean;
+    parentElectionHash: string;
+    lostRewardSet?: any[];
+    disabledSet?: any[];
     slots?: {
         firstSlotNumber: number;
         numSlots: number;
@@ -125,9 +150,7 @@ export type MacroBlock = {
             signature: string;
             signers: number[];
         };
-        votes: number;
     };
-    transactions?: Transaction[];
 }
 
 export type Block = MicroBlock | MacroBlock
