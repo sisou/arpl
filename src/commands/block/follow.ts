@@ -24,14 +24,11 @@ export default class BlockFollow extends RpcCommand {
         block.type,
         `#${block.number}`,
         block.hash,
-        'producer' in block /* micro block */ ?
-          block.producer.slotNumber.toString().padStart(3, ' ') /* macro block */ :
-          '   ',
-        block.type === 'micro' ?
-          `${block.transactions!.length} tx${block.transactions!.length === 1 ? '' : 's'}` :
+        `${block.transactions!.length} tx`.padStart(6, ' '),
+        block.type === 'macro' ?
           block.isElectionBlock ?
             `election (epoch ${block.epoch} => ${block.epoch + 1})` :
-            `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})`,
+            `checkpoint (batch ${block.batch % batchesPerEpoch}/${batchesPerEpoch})` : '',
       ].join(' ｜'))
 
       this.showMetadataIfRequested(metadata, flags, 'Block subscription')
