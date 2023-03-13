@@ -10,6 +10,14 @@ export default class TransactionGet extends RpcCommand {
     name: 'hash',
     description: 'Transaction hash of the transaction to get',
     required: true,
+  }, {
+    name: 'from',
+    description: 'Filter transactions by sender. Empty list means any senders',
+    required: false,
+  }, {
+    name: 'to',
+    description: 'Filter transactions by recipient. Empty list means any recipients',
+    required: false,
   }]
 
   async run() {
@@ -18,7 +26,7 @@ export default class TransactionGet extends RpcCommand {
     const {data: transaction, metadata} = await this.call<Transaction>(
       TransactionGet,
       'getTransactionByHash',
-      [args.hash],
+      [args.hash, args.from, args.to],
     )
 
     console.dir(transaction, {depth: Infinity, maxArrayLength: Infinity}) // eslint-disable-line no-console

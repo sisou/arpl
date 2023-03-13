@@ -21,7 +21,7 @@ $ npm install -g @sisou/albatross-remote
 $ arpl COMMAND
 running command...
 $ arpl (-v|--version|version)
-@sisou/albatross-remote/0.9.2 linux-x64 node-v16.15.0
+@sisou/albatross-remote/0.9.2 linux-x64 node-v16.16.0
 $ arpl --help [COMMAND]
 USAGE
   $ arpl COMMAND
@@ -67,7 +67,7 @@ USAGE
 * [`arpl stake:start WALLET VALIDATOR_ADDRESS VALUE`](#arpl-stakestart-wallet-validator_address-value)
 * [`arpl stake:stop WALLET VALUE`](#arpl-stakestop-wallet-value)
 * [`arpl status`](#arpl-status)
-* [`arpl transaction:get HASH`](#arpl-transactionget-hash)
+* [`arpl transaction:get HASH [FROM] [TO]`](#arpl-transactionget-hash-from-to)
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
 * [`arpl validator:delete WALLET`](#arpl-validatordelete-wallet)
 * [`arpl validator:get VALIDATOR_ADDRESS`](#arpl-validatorget-validator_address)
@@ -431,16 +431,18 @@ USAGE
 
 _See code: [src/commands/status.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/status.ts)_
 
-## `arpl transaction:get HASH`
+## `arpl transaction:get HASH [FROM] [TO]`
 
 Show transaction information
 
 ```
 USAGE
-  $ arpl transaction:get HASH
+  $ arpl transaction:get HASH [FROM] [TO]
 
 ARGUMENTS
   HASH  Transaction hash of the transaction to get
+  FROM  Filter transactions by sender. Empty list means any senders
+  TO    Filter transactions by recipient. Empty list means any recipients
 
 ALIASES
   $ arpl tx:get
