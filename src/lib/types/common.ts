@@ -9,17 +9,17 @@ export type RpcResponse<R> = {
 }
 
 export type PolicyConstants = {
-    stakingContractAddress: string,
-    coinbaseAddress: string,
-    transactionValidityWindow: number,
-    maxSizeMicroBody: number,
-    version: number,
-    slots: number,
-    blocksPerBatch: number,
-    batchesPerEpoch: number,
-    blocksPerEpoch: number,
-    validatorDeposit: number,
-    totalSupply: number,
+    stakingContractAddress: string;
+    coinbaseAddress: string;
+    transactionValidityWindow: number;
+    maxSizeMicroBody: number;
+    version: number;
+    slots: number;
+    blocksPerBatch: number;
+    batchesPerEpoch: number;
+    blocksPerEpoch: number;
+    validatorDeposit: number;
+    totalSupply: number;
 }
 
 export enum AccountType {

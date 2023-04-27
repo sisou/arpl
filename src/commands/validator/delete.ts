@@ -2,7 +2,7 @@ import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class ValidatorDelete extends RpcCommand {
-  static description = 'Delete an inactive validator'
+  static description = 'Delete a retired validator'
 
   static args = [{
     name: 'wallet',

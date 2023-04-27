@@ -1,7 +1,7 @@
 import {RpcCommand} from '../../lib/rpc-command'
 
-export default class ValidatorInactivate extends RpcCommand {
-  static description = 'Inactivate an active validator'
+export default class ValidatorRetire extends RpcCommand {
+  static description = 'Retire an active or deactivated validator'
 
   static args = [{
     name: 'wallet',
@@ -13,7 +13,7 @@ export default class ValidatorInactivate extends RpcCommand {
     required: true,
   }, {
     name: 'signing_secret_key',
-    description: 'Secret key used to sign the reactivate transaction',
+    description: 'Secret key used to sign the retire transaction',
     required: true,
   }]
 
@@ -23,10 +23,10 @@ export default class ValidatorInactivate extends RpcCommand {
   }
 
   async run() {
-    const {args, flags} = this.parse(ValidatorInactivate)
+    const {args, flags} = this.parse(ValidatorRetire)
 
-    const method = `${flags.dry ? 'create' : 'send'}InactivateValidatorTransaction`
-    const {data: hash, metadata} = await this.call(ValidatorInactivate, method, [
+    const method = `${flags.dry ? 'create' : 'send'}RetireValidatorTransaction`
+    const {data: hash, metadata} = await this.call(ValidatorRetire, method, [
       args.wallet,
       args.validator_address,
       args.signing_secret_key,

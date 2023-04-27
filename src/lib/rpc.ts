@@ -2,7 +2,7 @@ import {Client as WebsocketClient} from 'rpc-websockets'
 import fetch from 'node-fetch'
 import cli from 'cli-ux'
 import type {IWSRequestParams} from 'rpc-websockets/dist/lib/client'
-import type { RpcResponse } from './server-types'
+import type {RpcResponse} from './server-types'
 
 type WebsocketOptions = {
   mask?: boolean;

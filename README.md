@@ -21,7 +21,7 @@ $ npm install -g @sisou/albatross-remote
 $ arpl COMMAND
 running command...
 $ arpl (-v|--version|version)
-@sisou/albatross-remote/0.9.2 linux-x64 node-v16.15.0
+@sisou/albatross-remote/0.9.2 linux-x64 node-v16.16.0
 $ arpl --help [COMMAND]
 USAGE
   $ arpl COMMAND
@@ -69,11 +69,12 @@ USAGE
 * [`arpl status`](#arpl-status)
 * [`arpl transaction:get HASH`](#arpl-transactionget-hash)
 * [`arpl transaction:send WALLET RECIPIENT VALUE`](#arpl-transactionsend-wallet-recipient-value)
+* [`arpl validator:deactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatordeactivate-wallet-validator_address-signing_secret_key)
 * [`arpl validator:delete WALLET`](#arpl-validatordelete-wallet)
 * [`arpl validator:get VALIDATOR_ADDRESS`](#arpl-validatorget-validator_address)
-* [`arpl validator:inactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorinactivate-wallet-validator_address-signing_secret_key)
 * [`arpl validator:new WALLET SIGNING_SECRET_KEY VOTING_SECRET_KEY`](#arpl-validatornew-wallet-signing_secret_key-voting_secret_key)
 * [`arpl validator:reactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorreactivate-wallet-validator_address-signing_secret_key)
+* [`arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorretire-wallet-validator_address-signing_secret_key)
 * [`arpl validator:unpark WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`](#arpl-validatorunpark-wallet-validator_address-signing_secret_key)
 * [`arpl validator:update WALLET VALIDATOR_ADDRESS`](#arpl-validatorupdate-wallet-validator_address)
 
@@ -473,6 +474,27 @@ ALIASES
 
 _See code: [src/commands/transaction/send.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/transaction/send.ts)_
 
+## `arpl validator:deactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
+
+Deactivate an active validator
+
+```
+USAGE
+  $ arpl validator:deactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
+
+ARGUMENTS
+  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
+  VALIDATOR_ADDRESS   Address of the validator
+  SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+```
+
+_See code: [src/commands/validator/deactivate.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/validator/deactivate.ts)_
+
 ## `arpl validator:delete WALLET`
 
 Delete an inactive validator
@@ -510,27 +532,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/validator/get.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/validator/get.ts)_
-
-## `arpl validator:inactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
-
-Inactivate an active validator
-
-```
-USAGE
-  $ arpl validator:inactivate WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
-
-ARGUMENTS
-  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
-  VALIDATOR_ADDRESS   Address of the validator
-  SIGNING_SECRET_KEY  Secret key used to sign the reactivate transaction
-
-OPTIONS
-  --dry                            Return serialized transaction without sending it
-  --fee=fee                        Fee in Luna (default: 0)
-  --validity-start=validity-start  [default: +0] Validity start height of the transaction
-```
-
-_See code: [src/commands/validator/inactivate.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/validator/inactivate.ts)_
 
 ## `arpl validator:new WALLET SIGNING_SECRET_KEY VOTING_SECRET_KEY`
 
@@ -583,6 +584,27 @@ OPTIONS
 ```
 
 _See code: [src/commands/validator/reactivate.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/validator/reactivate.ts)_
+
+## `arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
+
+Retire an active validator
+
+```
+USAGE
+  $ arpl validator:retire WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY
+
+ARGUMENTS
+  WALLET              Address of unlocked account to send transaction from (fees are taken from this account)
+  VALIDATOR_ADDRESS   Address of the validator
+  SIGNING_SECRET_KEY  Secret key used to sign the retire transaction
+
+OPTIONS
+  --dry                            Return serialized transaction without sending it
+  --fee=fee                        Fee in Luna (default: 0)
+  --validity-start=validity-start  [default: +0] Validity start height of the transaction
+```
+
+_See code: [src/commands/validator/retire.ts](https://github.com/sisou/arpl/blob/v0.9.2/src/commands/validator/retire.ts)_
 
 ## `arpl validator:unpark WALLET VALIDATOR_ADDRESS SIGNING_SECRET_KEY`
 

@@ -9,7 +9,7 @@ export default class BlockFollow extends RpcCommand {
   async run() {
     const {flags} = this.parse(BlockFollow)
 
-    const { data: policyConstants } = await this.call<PolicyConstants>(BlockFollow, 'getPolicyConstants')
+    const {data: policyConstants} = await this.call<PolicyConstants>(BlockFollow, 'getPolicyConstants')
     const batchesPerEpoch = policyConstants.batchesPerEpoch
 
     // Throws when not in REPL
@@ -17,9 +17,7 @@ export default class BlockFollow extends RpcCommand {
     this.log('Subscribed to blocks')
     this.showMetadataIfRequested(metadata, flags);
 
-
     (this.$rpc as Socket).onSubscription<Block>('subscribeForHeadBlock', subscriptionId, ({data: block, metadata}) => {
-
       this.log([
         block.type,
         `#${block.number}`,

@@ -53,8 +53,8 @@ export type UpdateValidatorLog = {
     newRewardAddress: Address | null;
 }
 
-export type InactivateValidatorLog = {
-    type: 'inactivate-validator';
+export type DeactivateValidatorLog = {
+    type: 'deactivate-validator';
     validatorAddress: Address;
 }
 
@@ -65,6 +65,11 @@ export type ReactivateValidatorLog = {
 
 export type UnparkValidatorLog = {
     type: 'unpark-validator';
+    validatorAddress: Address;
+}
+
+export type RetireValidatorLog = {
+    type: 'retire-validator';
     validatorAddress: Address;
 }
 
@@ -102,7 +107,7 @@ export type UnstakeLog = {
     value: Coin;
 }
 
-export type Log = PayFeeLog | TransferLog | CreateValidatorLog | UpdateValidatorLog | InactivateValidatorLog | ReactivateValidatorLog | UnparkValidatorLog | DeleteValidatorLog | CreateStakerLog | StakeLog | UpdateStakerLog | UnstakeLog
+export type Log = PayFeeLog | TransferLog | CreateValidatorLog | UpdateValidatorLog | DeactivateValidatorLog | RetireValidatorLog | ReactivateValidatorLog | UnparkValidatorLog | DeleteValidatorLog | CreateStakerLog | StakeLog | UpdateStakerLog | UnstakeLog
 
 export type TransactionLog = {
     hash: string;
