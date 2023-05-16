@@ -16,9 +16,6 @@ export default class ValidatorGet extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
-    stakers: flags.boolean({
-      description: 'Include a list of the validator\'s stakers',
-    }),
     plain: flags.boolean({
       description: 'Display plain command output',
     }),
@@ -30,7 +27,7 @@ export default class ValidatorGet extends RpcCommand {
     const {data: validator, metadata} = await this.call<BlockchainState<Validator>>(
       ValidatorGet,
       'getValidatorByAddress',
-      [args.validator_address, flags.stakers],
+      [args.validator_address],
     )
 
     // if (flags.plain) {
