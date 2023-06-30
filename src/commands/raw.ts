@@ -38,6 +38,15 @@ export default class Raw extends RpcCommand {
 
       if (arg === 'null') return null
 
+      if (arg.startsWith('{') && arg.endsWith('}')) {
+        try {
+          return JSON.parse(arg)
+        } catch (error) {
+          // Ignore
+          console.warn(`Could not parse argument ${arg} as JSON: ${error.message}`) // eslint-disable-line no-console
+        }
+      }
+
       return arg
     })
 
