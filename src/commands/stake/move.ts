@@ -1,3 +1,4 @@
+import { flags } from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeMove extends RpcCommand {
@@ -17,6 +18,9 @@ export default class StakeMove extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
+    'no-reactivate': flags.boolean({
+      description: 'Do not reactivate all stake after changing delegation',
+    }),
     ...RpcCommand.stakingSignallingFlags,
     ...RpcCommand.txFlags,
   }
@@ -28,7 +32,7 @@ export default class StakeMove extends RpcCommand {
     if (flags['fee-wallet']) {
       pay_fee_from_stake = false
     } else {
-      pay_fee_from_stake = await this.canPayFeeFromStake(args.wallet, flags)
+      await this.canPayFeeFromStake(args.wallet, flags)
     }
 
     const method = `${flags.dry ? 'create' : 'send'}UpdateStakerTransaction`
@@ -36,6 +40,7 @@ export default class StakeMove extends RpcCommand {
       pay_fee_from_stake ? null : flags['fee-wallet'],
       args.wallet,
       args.new_validator_address,
+      !flags['no-reactivate'],
       flags.fee,
       flags['validity-start'],
     ])

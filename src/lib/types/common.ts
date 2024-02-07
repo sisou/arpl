@@ -159,6 +159,9 @@ export type Staker = {
     address: Address;
     balance: Coin;
     delegation?: Address;
+    inactiveBalance: Coin;
+    inactiveFrom: number | null;
+    retiredBalance: Coin;
 }
 
 export type Validator = {
