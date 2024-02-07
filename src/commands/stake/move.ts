@@ -1,4 +1,4 @@
-import { flags } from '@oclif/command'
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeMove extends RpcCommand {

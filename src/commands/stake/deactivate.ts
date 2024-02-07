@@ -1,6 +1,6 @@
-import { flags } from '@oclif/command'
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
-import { Staker } from '../../lib/server-types'
+import {Staker} from '../../lib/server-types'
 
 export default class StakeDeactivate extends RpcCommand {
   static description = 'Deactivate stake, for moving to another validator or retiring'
@@ -20,8 +20,8 @@ export default class StakeDeactivate extends RpcCommand {
 
   static flags = {
     ...RpcCommand.flags,
-    'all': flags.boolean({
-        description: 'Deactivate all active stake',
+    all: flags.boolean({
+      description: 'Deactivate all active stake',
     }),
     ...RpcCommand.stakingSignallingFlags,
     ...RpcCommand.txFlags,
@@ -38,12 +38,12 @@ export default class StakeDeactivate extends RpcCommand {
       staker = await this.canPayFeeFromStake(args.wallet, flags)
     }
 
-    let new_active_balance = Infinity;
+    let new_active_balance = Infinity
     if (flags.all) {
-        new_active_balance = 0
+      new_active_balance = 0
     } else {
-        staker = staker || (await this.$rpc.call('getStakerByAddress', [args.wallet])).data as Staker
-        new_active_balance = staker.balance - args.amount
+      staker = staker || (await this.$rpc.call('getStakerByAddress', [args.wallet])).data as Staker
+      new_active_balance = staker.balance - args.amount
     }
 
     const method = `${flags.dry ? 'create' : 'send'}SetActiveStakeTransaction`

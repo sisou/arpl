@@ -1,4 +1,4 @@
-import { flags } from '@oclif/command'
+import {flags} from '@oclif/command'
 import {RpcCommand} from '../../lib/rpc-command'
 
 export default class StakeRemove extends RpcCommand {
@@ -20,7 +20,7 @@ export default class StakeRemove extends RpcCommand {
   static flags = {
     ...RpcCommand.flags,
     all: flags.boolean({
-        description: 'Remove/unstake all retired stake',
+      description: 'Remove/unstake all retired stake',
     }),
     recipient: flags.string({
       description: 'Address to receive stake (default: WALLET)',
@@ -33,10 +33,10 @@ export default class StakeRemove extends RpcCommand {
 
     const staker = await this.canPayFeeFromStake(args.wallet, flags)
 
-    let remove_amount = args.amount || 0;
+    let remove_amount = args.amount || 0
 
     if (flags.all) {
-        remove_amount = staker.retiredBalance
+      remove_amount = staker.retiredBalance
     }
 
     const method = `${flags.dry ? 'create' : 'send'}RemoveStakeTransaction`
