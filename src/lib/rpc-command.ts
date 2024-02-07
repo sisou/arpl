@@ -86,7 +86,7 @@ export abstract class RpcCommand extends Command {
     },
   ): Promise<Staker> {
     const staker = (await this.$rpc.call('getStakerByAddress', [stakerAddress], flags.timeout)).data as Staker
-    if (staker.balance > flags.fee) return staker
+    if (staker.balance + staker.inactiveBalance + staker.retiredBalance > flags.fee) return staker
     throw new Error('Cannot pay fee from stake: not enough stake. Use --fee-wallet to specify which account to pay the fee from.')
   }
 }
