@@ -9,7 +9,7 @@ export default class ValidatorRetire extends RpcCommand {
     required: true,
   }, {
     name: 'validator_address',
-    description: 'Address of the validator',
+    description: 'Address of unlocked account that owns the validator',
     required: true,
   }]
 
