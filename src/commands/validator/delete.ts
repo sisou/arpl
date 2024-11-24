@@ -26,6 +26,7 @@ export default class ValidatorDelete extends RpcCommand {
       args.wallet,
       flags.recipient || args.wallet,
       flags.fee,
+      100_000e5, // Value: the validator deposit
       flags['validity-start'],
     ])
 
