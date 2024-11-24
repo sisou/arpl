@@ -11,10 +11,6 @@ export default class ValidatorRetire extends RpcCommand {
     name: 'validator_address',
     description: 'Address of the validator',
     required: true,
-  }, {
-    name: 'signing_secret_key',
-    description: 'Secret key used to sign the retire transaction',
-    required: true,
   }]
 
   static flags = {
@@ -29,7 +25,6 @@ export default class ValidatorRetire extends RpcCommand {
     const {data: hash, metadata} = await this.call(ValidatorRetire, method, [
       args.wallet,
       args.validator_address,
-      args.signing_secret_key,
       flags.fee,
       flags['validity-start'],
     ])
