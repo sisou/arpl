@@ -10,7 +10,7 @@
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
-    "@oclif/plugin-help": "^3",
+    "@oclif/plugin-help": "3.2.2",
     "@sisou/oclif-plugin-repl": "^0",
     "cli-ux": "^5.5.1",
     "minimist": "^1.2.5",
