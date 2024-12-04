@@ -49,7 +49,7 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "helpClass": "./src/help",
+    "helpClass": "./lib/help",
     "bin": "arpl",
     "topics": {
       "account": {
