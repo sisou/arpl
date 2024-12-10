@@ -24,6 +24,9 @@ export default class AccountTransactions extends RpcCommand {
         return max
       },
     }),
+    startAt: flags.string({
+      description: 'Transaction hash to start at, used for paging',
+    }),
     ...cli.table.flags(),
   }
 
@@ -33,7 +36,11 @@ export default class AccountTransactions extends RpcCommand {
     const {data: transactions, metadata} = await this.call<Transaction[]>(
       AccountTransactions,
       'getTransactionsByAddress',
-      [args.address, flags.max || null],
+      [
+        args.address,
+        flags.max || null,
+        flags.startAt || null,
+      ],
     )
 
     cli.table(transactions, {
